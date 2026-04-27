@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Clasificación global de la Legión Eterna — Torneos WH40K en TTS." />
+  <title>Clasificación | Legión Eterna</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+
+  <div class="skull-watermark">☠</div>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="skull-icon">☠</span>
+        <span>Legión Eterna</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="clasificacion.html" class="active">Clasificación</a></li>
+        <li><a href="reglas.html">Reglamento</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <!-- PAGE HEADER -->
+    <div style="text-align:center; padding: 2.5rem 0 1.5rem;">
+      <p class="hero-eyebrow" style="font-family: var(--font-heading); font-size:0.7rem; letter-spacing:0.4em; color:var(--gold-dim); text-transform:uppercase; margin-bottom:0.75rem;">
+        Temporada III · 2025
+      </p>
+      <h1 class="section-heading">Clasificación Global</h1>
+      <div class="ornament"><span class="ornament-text">☩ Los nombres de los caídos y los victoriosos ☩</span></div>
+      <p style="color:var(--parchment-dim); max-width:560px; margin:0 auto; font-size:0.9rem;">
+        Haz clic en cualquier puntuación para consultar el desglose detallado del general.
+        Las posiciones se actualizan tras cada ronda.
+      </p>
+    </div>
+
+    <!-- RANKING TABLE -->
+    <div class="panel" style="padding: 0; overflow:hidden;">
+      <div class="ranking-table-wrap">
+        <table class="ranking-table" id="rankingTable">
+          <thead>
+            <tr>
+              <th style="text-align:center;">Pos.</th>
+              <th>General</th>
+              <th style="text-align:right;">Puntuación</th>
+            </tr>
+          </thead>
+          <tbody id="rankingBody">
+            <!-- JS populated -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SCORE DETAIL PANEL -->
+    <div class="score-detail" id="scoreDetail">
+      <div class="score-detail-header">
+        <div>
+          <div class="score-detail-name" id="detailName">—</div>
+          <div class="score-detail-army" id="detailArmy">Facción: <span>—</span></div>
+        </div>
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <div>
+            <div style="font-family:var(--font-heading);font-size:0.6rem;letter-spacing:0.3em;color:var(--gold-dim);text-transform:uppercase;text-align:right;margin-bottom:0.2rem;">Puntuación Total</div>
+            <div class="score-detail-total" id="detailTotal">0 pts</div>
+          </div>
+          <button class="score-close-btn" onclick="closeDetail()">✕ Cerrar</button>
+        </div>
+      </div>
+
+      <div class="score-breakdown" id="detailBreakdown">
+        <!-- JS populated -->
+      </div>
+
+      <div class="rule-highlight" id="detailNote" style="margin:0;"></div>
+    </div>
+
+    <!-- LEGEND -->
+    <div style="display:flex; flex-wrap:wrap; gap:1.5rem; margin-top:1.5rem; justify-content:center;">
+      <span style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.15em;color:var(--parchment-dim);">
+        <span style="color:#ffd700">◆</span> Oro — 1er Puesto
+      </span>
+      <span style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.15em;color:var(--parchment-dim);">
+        <span style="color:#c0c0c0">◆</span> Plata — 2º Puesto
+      </span>
+      <span style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.15em;color:var(--parchment-dim);">
+        <span style="color:#cd7f32">◆</span> Bronce — 3er Puesto
+      </span>
+      <span style="font-family:var(--font-heading);font-size:0.7rem;letter-spacing:0.15em;color:var(--parchment-dim);">
+        Haz clic en la puntuación para ver el desglose
+      </span>
+    </div>
+
+  </div><!-- /page -->
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">☠ Legión Eterna ☠</div>
+      <p class="footer-note">
+        Comunidad independiente de torneos de Warhammer 40.000 en TTS.<br>
+        No afiliada a Games Workshop Ltd. Warhammer 40.000 es marca registrada de Games Workshop.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Ranking Data ──────────────────────────────────────────
+    const players = [
+      {
+        rank: 1, name: "Inquisitor_Vael",     score: 187,
+        faction: "Custodios del Adeptus",
+        wins: 8, losses: 0, draws: 1,
+        vp_favor: 412, vp_contra: 218,
+        torneos: 3, mejorResultado: "1º en Gran Torneo de Abril",
+        nota: "Invicto en partidas de eliminatoria. Especialista en misiones de control de objetivos."
+      },
+      {
+        rank: 2, name: "GhostLord_Alpharius", score: 174,
+        faction: "Legión Alfa · Caos",
+        wins: 7, losses: 1, draws: 1,
+        vp_favor: 398, vp_contra: 251,
+        torneos: 3, mejorResultado: "Finalista en Gran Torneo de Abril",
+        nota: "Maestro de la identidad oculta. Sus listas siempre sorprenden al rival."
+      },
+      {
+        rank: 3, name: "Warsmith_Krevados",   score: 161,
+        faction: "Puño de Hierro · Caos",
+        wins: 7, losses: 2, draws: 0,
+        vp_favor: 377, vp_contra: 290,
+        torneos: 3, mejorResultado: "3º en Gran Torneo de Abril",
+        nota: "Domina el uso del terreno y las líneas de visión en escenarios de asedio."
+      },
+      {
+        rank: 4, name: "Sororitas_Mhaeda",    score: 149,
+        faction: "Adepta Sororitas",
+        wins: 6, losses: 2, draws: 1,
+        vp_favor: 345, vp_contra: 270,
+        torneos: 3, mejorResultado: "Semifinalista en Gran Torneo de Marzo",
+        nota: "Récord de puntos de victoria en un solo torneo: 148 VP en una sola ronda."
+      },
+      {
+        rank: 5, name: "TyrantOfCalth",       score: 138,
+        faction: "Ultramarines · 2ª Compañía",
+        wins: 6, losses: 3, draws: 0,
+        vp_favor: 321, vp_contra: 289,
+        torneos: 2, mejorResultado: "2º en Torneo de Marzo",
+        nota: "Jugador con la lista más iterada del circuito. Fiel al Código Astartes."
+      },
+      {
+        rank: 6, name: "NecronLord_Szar",     score: 128,
+        faction: "Necrones · Dinastía Szarekh",
+        wins: 5, losses: 3, draws: 1,
+        vp_favor: 305, vp_contra: 278,
+        torneos: 3, mejorResultado: "Top 8 en Gran Torneo de Abril",
+        nota: "Especialista en barrido de objetivos con Escarabajos Canópticos."
+      },
+      {
+        rank: 7, name: "Archon_Vrethkai",     score: 117,
+        faction: "Eldar Oscuros · Kabal Obsidiana",
+        wins: 5, losses: 4, draws: 0,
+        vp_favor: 290, vp_contra: 285,
+        torneos: 2, mejorResultado: "Top 8 en Gran Torneo de Marzo",
+        nota: "El general más rápido del circuito. Sus listas maximizan la movilidad ofensiva."
+      },
+      {
+        rank: 8, name: "Warboss_Gutsmasha",   score: 108,
+        faction: "Orcos del WAAAGH! Gitrazga",
+        wins: 4, losses: 3, draws: 2,
+        vp_favor: 278, vp_contra: 272,
+        torneos: 3, mejorResultado: "Top 8 en Gran Torneo de Abril",
+        nota: "Máxima eficiencia en primeros turnos. Sus disparos de apertura son legendarios."
+      },
+      {
+        rank: 9, name: "Herald_Tzeentch_IX",  score: 99,
+        faction: "Demonios de Tzeentch",
+        wins: 4, losses: 4, draws: 1,
+        vp_favor: 265, vp_contra: 263,
+        torneos: 2, mejorResultado: "5º en Torneo de Febrero",
+        nota: "El destino es maleable. Sus partidas siempre acaban en marcadores ajustadísimos."
+      },
+      {
+        rank: 10, name: "SpacePuppy_Fenris",  score: 91,
+        faction: "Lobos del Espacio",
+        wins: 4, losses: 5, draws: 0,
+        vp_favor: 251, vp_contra: 278,
+        torneos: 2, mejorResultado: "Top 8 en Torneo de Febrero",
+        nota: "Agresivo en extremo. Lleva el combate al corazón del rival desde el turno 1."
+      },
+      {
+        rank: 11, name: "Daemon_Prince_Xan",  score: 84,
+        faction: "Miles del Caos · Sin Señor",
+        wins: 3, losses: 4, draws: 2,
+        vp_favor: 235, vp_contra: 241,
+        torneos: 2, mejorResultado: "7º en Gran Torneo de Marzo",
+        nota: "Versátil y adaptable. Cambia de lista entre torneos con gran facilidad."
+      },
+      {
+        rank: 12, name: "PharonHex",          score: 77,
+        faction: "Necrones · Plagas de Crowe",
+        wins: 3, losses: 5, draws: 1,
+        vp_favor: 218, vp_contra: 244,
+        torneos: 2, mejorResultado: "8º en Gran Torneo de Marzo",
+        nota: "Fuerte en la defensa de objetivos centrales. Difícil de desalojar."
+      },
+      {
+        rank: 13, name: "Sister_Fiametta",    score: 70,
+        faction: "Adepta Sororitas · Orden del Cáliz Ardiente",
+        wins: 3, losses: 5, draws: 0,
+        vp_favor: 200, vp_contra: 238,
+        torneos: 2, mejorResultado: "9º en Gran Torneo de Febrero",
+        nota: "Especialista en Actos de Fe. Usa los milagros estratégicamente y con gran timing."
+      },
+      {
+        rank: 14, name: "TauCommander_Sept",  score: 63,
+        faction: "Imperio Tau · Sept Vior'la",
+        wins: 3, losses: 6, draws: 0,
+        vp_favor: 189, vp_contra: 258,
+        torneos: 2, mejorResultado: "10º en Gran Torneo de Marzo",
+        nota: "Máximo alcance de fuego del circuito. Sus bajas por disparo son élite."
+      },
+      {
+        rank: 15, name: "GenestealeOrk",      score: 58,
+        faction: "Tiránidos · Colmena Leviatan",
+        wins: 2, losses: 5, draws: 2,
+        vp_favor: 178, vp_contra: 251,
+        torneos: 2, mejorResultado: "11º en Gran Torneo de Marzo",
+        nota: "Jugador en pleno crecimiento. Sus últimas partidas muestran una mejora notable."
+      },
+      {
+        rank: 16, name: "Ravenwing_Korvo",    score: 51,
+        faction: "Ángeles Oscuros · Ravenwing",
+        wins: 2, losses: 6, draws: 1,
+        vp_favor: 162, vp_contra: 261,
+        torneos: 2, mejorResultado: "13º en Gran Torneo de Marzo",
+        nota: "El secreto de los Ángeles Oscuros le pesa, pero no le detendrá."
+      },
+      {
+        rank: 17, name: "VoxProphet",         score: 44,
+        faction: "Guardia Imperial · Regimiento Mordian",
+        wins: 2, losses: 7, draws: 0,
+        vp_favor: 151, vp_contra: 278,
+        torneos: 2, mejorResultado: "14º en Gran Torneo de Abril",
+        nota: "Bajas masivas en cada partida, pero el marcador no siempre acompaña."
+      },
+      {
+        rank: 18, name: "KhorneBerserker99",  score: 37,
+        faction: "Miles del Caos · Legión de Sangre",
+        wins: 1, losses: 7, draws: 1,
+        vp_favor: 138, vp_contra: 289,
+        torneos: 2, mejorResultado: "16º en Gran Torneo de Febrero",
+        nota: "¡SANGRE PARA EL DIOS DE LA SANGRE! La agresión pura no siempre puntúa suficiente."
+      },
+      {
+        rank: 19, name: "Rogue_Trader_Mira",  score: 28,
+        faction: "Corsarios Eldar · Flota Espectral",
+        wins: 1, losses: 8, draws: 0,
+        vp_favor: 119, vp_contra: 302,
+        torneos: 2, mejorResultado: "18º en Gran Torneo de Abril",
+        nota: "Debut reciente en el circuito. Potencial prometedor con una facción poco común."
+      },
+      {
+        rank: 20, name: "Gretchin_Kommandah", score: 14,
+        faction: "Orcos · Kommandos de los Badlands",
+        wins: 0, losses: 8, draws: 1,
+        vp_favor: 89, vp_contra: 319,
+        torneos: 2, mejorResultado: "Participación en Torneo de Febrero",
+        nota: "El más entusiasta del circuito. Cada derrota es un paso más hacia la gloria del WAAAGH!"
+      },
+    ];
+
+    // ── Render Table ─────────────────────────────────────────
+    function renderTable() {
+      const tbody = document.getElementById('rankingBody');
+      tbody.innerHTML = '';
+
+      players.forEach(p => {
+        let rankClass = 'rank-other';
+        let rowClass  = '';
+        if (p.rank === 1) { rankClass = 'rank-1'; rowClass = 'row-top1'; }
+        if (p.rank === 2) { rankClass = 'rank-2'; rowClass = 'row-top2'; }
+        if (p.rank === 3) { rankClass = 'rank-3'; rowClass = 'row-top3'; }
+
+        const medal = p.rank === 1 ? '🥇' : p.rank === 2 ? '🥈' : p.rank === 3 ? '🥉' : '';
+
+        const tr = document.createElement('tr');
+        tr.className = rowClass;
+        tr.innerHTML = `
+          <td class="col-rank"><span class="${rankClass}">${medal || p.rank}</span></td>
+          <td class="col-name">${p.name}</td>
+          <td class="col-score">
+            <button class="score-badge" onclick="showDetail(${p.rank - 1})" title="Ver desglose de ${p.name}">
+              ${p.score} <span style="font-size:0.65rem;opacity:0.6;letter-spacing:0.15em">PTS</span>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ── Show Detail Panel ────────────────────────────────────
+    let currentActive = null;
+
+    function showDetail(index) {
+      const p = players[index];
+      const detail = document.getElementById('scoreDetail');
+      const diff = p.vp_favor - p.vp_contra;
+      const diffSign = diff >= 0 ? '+' : '';
+      const diffClass = diff >= 0 ? 'positive' : 'negative';
+
+      // Update active button state
+      document.querySelectorAll('.score-badge').forEach((b, i) => {
+        b.classList.toggle('active', i === index);
+      });
+
+      if (currentActive === index && detail.classList.contains('visible')) {
+        closeDetail();
+        return;
+      }
+      currentActive = index;
+
+      document.getElementById('detailName').textContent  = p.name;
+      document.getElementById('detailArmy').innerHTML    = `Facción: <span>${p.faction}</span>`;
+      document.getElementById('detailTotal').textContent = `${p.score} pts`;
+      document.getElementById('detailNote').innerHTML    = `<em>"${p.nota}"</em><br><br>🏆 Mejor resultado: ${p.mejorResultado}`;
+
+      document.getElementById('detailBreakdown').innerHTML = `
+        <div class="score-item">
+          <div class="score-item-label">Victorias</div>
+          <div class="score-item-value positive">${p.wins}</div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">Derrotas</div>
+          <div class="score-item-value negative">${p.losses}</div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">Empates</div>
+          <div class="score-item-value">${p.draws}</div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">VP a Favor</div>
+          <div class="score-item-value">${p.vp_favor}</div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">VP en Contra</div>
+          <div class="score-item-value">${p.vp_contra}</div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">Diferencial VP</div>
+          <div class="score-item-value ${diffClass}">${diffSign}${diff}</div>
+        </div>
+        <div class="score-item">
+          <div class="score-item-label">Torneos</div>
+          <div class="score-item-value">${p.torneos}</div>
+        </div>
+      `;
+
+      detail.classList.remove('visible');
+      void detail.offsetWidth; // force reflow for animation
+      detail.classList.add('visible');
+      detail.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function closeDetail() {
+      document.getElementById('scoreDetail').classList.remove('visible');
+      document.querySelectorAll('.score-badge').forEach(b => b.classList.remove('active'));
+      currentActive = null;
+    }
+
+    renderTable();
+  </script>
+</body>
+</html>
