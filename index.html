@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Warhammer 40K — Comunidad Española</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Tipografías modernas para Warhammer -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════ HEADER ══════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚙</span>
+        <div class="logo-text">
+          <span class="logo-title">WARHAMMER</span>
+          <span class="logo-sub">40.000 · COMUNIDAD ES</span>
+        </div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- NAV OVERLAY -->
+    <nav class="nav-overlay" id="navOverlay">
+      <button class="nav-close" id="navClose" aria-label="Cerrar">✕</button>
+      <ul class="nav-links">
+        <li><a href="#inicio"       class="nav-link active"  data-page="inicio">       <i class="fas fa-home"></i> Inicio</a></li>
+        <li><a href="#clasificacion" class="nav-link"        data-page="clasificacion"><i class="fas fa-trophy"></i> Clasificación</a></li>
+        <li><a href="#reglamentos"  class="nav-link"         data-page="reglamentos">  <i class="fas fa-scroll"></i> Reglamentos</a></li>
+        <li><a href="#facciones"    class="nav-link"         data-page="facciones">    <i class="fas fa-shield-halved"></i> Facciones</a></li>
+        <li><a href="#galeria"      class="nav-link"         data-page="galeria">      <i class="fas fa-images"></i> Galería</a></li>
+        <li><a href="#eventos"      class="nav-link"         data-page="eventos">      <i class="fas fa-calendar-days"></i> Eventos</a></li>
+      </ul>
+      <div class="nav-discord-cta">
+        <a href="https://discord.gg/tu-servidor" target="_blank" class="btn-discord-nav">
+          <i class="fab fa-discord"></i> UNIRSE AL DISCORD
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ══════════════════════════ MAIN ══════════════════════════ -->
+  <main>
+
+    <!-- ─────────── PAGE: INICIO ─────────── -->
+    <section class="page active" id="inicio">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero-bg-overlay"></div>
+        <div class="noise-layer"></div>
+        <div class="hero-content">
+          <div class="hero-eyebrow">IN THE GRIM DARKNESS OF THE FAR FUTURE</div>
+          <h1 class="hero-title">
+            <span class="line1">THERE IS</span>
+            <span class="line2">ONLY <em>WAR</em></span>
+          </h1>
+          <p class="hero-sub">La comunidad española de Warhammer 40.000.<br/>Torneos · Lore · Pintura · Comunidad</p>
+
+          <!-- ✦ DISCORD CTA — PUNTO PRINCIPAL ✦ -->
+          <div class="discord-cta-wrapper">
+            <div class="cta-glow-ring"></div>
+            <a href="https://discord.gg/tu-servidor" target="_blank" class="btn-discord-hero">
+              <i class="fab fa-discord"></i>
+              <span class="btn-main-text">ÚNETE AL DISCORD</span>
+              <span class="btn-sub-text">+2.400 hermanos del Imperium</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-scroll-hint">
+          <span>EXPLORAR</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <!-- STATS BAR -->
+      <div class="stats-bar">
+        <div class="stat"><span class="stat-num">2.4K</span><span class="stat-label">Miembros</span></div>
+        <div class="stat-divider">✦</div>
+        <div class="stat"><span class="stat-num">48</span><span class="stat-label">Torneos</span></div>
+        <div class="stat-divider">✦</div>
+        <div class="stat"><span class="stat-num">12</span><span class="stat-label">Facciones</span></div>
+        <div class="stat-divider">✦</div>
+        <div class="stat"><span class="stat-num">7ª</span><span class="stat-label">Temporada</span></div>
+      </div>
+
+      <!-- FEATURE CARDS -->
+      <section class="features">
+        <div class="section-header">
+          <h2 class="section-title">¿QUÉ ENCONTRARÁS?</h2>
+          <div class="section-rule"></div>
+        </div>
+        <div class="cards-grid">
+          <div class="card" onclick="openPage('clasificacion')">
+            <div class="card-icon">🏆</div>
+            <h3 class="card-title">Clasificación</h3>
+            <p class="card-desc">Ranking actualizado de todos los generales de la comunidad. ¿Dónde estás tú?</p>
+            <span class="card-arrow">→</span>
+          </div>
+          <div class="card" onclick="openPage('reglamentos')">
+            <div class="card-icon">📜</div>
+            <h3 class="card-title">Reglamentos</h3>
+            <p class="card-desc">Reglas de la comunidad, FAQs y documentos oficiales de la temporada activa.</p>
+            <span class="card-arrow">→</span>
+          </div>
+          <div class="card" onclick="openPage('facciones')">
+            <div class="card-icon">⚔️</div>
+            <h3 class="card-title">Facciones</h3>
+            <p class="card-desc">Guías de inicio, tier lists y análisis de cada facción del universo 40K.</p>
+            <span class="card-arrow">→</span>
+          </div>
+          <div class="card" onclick="openPage('eventos')">
+            <div class="card-icon">📅</div>
+            <h3 class="card-title">Eventos</h3>
+            <p class="card-desc">Próximos torneos, painting contests y partidas abiertas en toda España.</p>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRÓXIMO EVENTO BANNER -->
+      <div class="event-banner">
+        <div class="event-badge">PRÓXIMO EVENTO</div>
+        <div class="event-info">
+          <span class="event-date"><i class="fas fa-calendar"></i> 10 Mayo 2025</span>
+          <h3 class="event-name">Gran Torneo de Primavera — Madrid</h3>
+          <span class="event-spots">🔴 Últimas 8 plazas disponibles</span>
+        </div>
+        <a href="https://discord.gg/tu-servidor" target="_blank" class="btn-event">INSCRIBIRSE</a>
+      </div>
+
+    </section>
+
+    <!-- ─────────── PAGE: CLASIFICACIÓN ─────────── -->
+    <section class="page" id="clasificacion">
+      <div class="page-header">
+        <h2 class="page-title"><i class="fas fa-trophy"></i> Clasificación</h2>
+        <p class="page-subtitle">Temporada 7 · 2025</p>
+      </div>
+
+      <div class="season-tabs">
+        <button class="s-tab active">General</button>
+        <button class="s-tab">Imperium</button>
+        <button class="s-tab">Caos</button>
+        <button class="s-tab">Xenos</button>
+      </div>
+
+      <div class="leaderboard">
+        <div class="lb-row lb-top-3 gold">
+          <span class="lb-pos">1</span>
+          <div class="lb-avatar">GS</div>
+          <div class="lb-info">
+            <span class="lb-name">GrimSword</span>
+            <span class="lb-faction">Space Marines</span>
+          </div>
+          <div class="lb-score">2.840 <span class="lb-pts">pts</span></div>
+          <span class="lb-medal">🥇</span>
+        </div>
+        <div class="lb-row lb-top-3 silver">
+          <span class="lb-pos">2</span>
+          <div class="lb-avatar">DL</div>
+          <div class="lb-info">
+            <span class="lb-name">DarkLegion</span>
+            <span class="lb-faction">Death Guard</span>
+          </div>
+          <div class="lb-score">2.710 <span class="lb-pts">pts</span></div>
+          <span class="lb-medal">🥈</span>
+        </div>
+        <div class="lb-row lb-top-3 bronze">
+          <span class="lb-pos">3</span>
+          <div class="lb-avatar">XC</div>
+          <div class="lb-info">
+            <span class="lb-name">XenosChief</span>
+            <span class="lb-faction">Tyranids</span>
+          </div>
+          <div class="lb-score">2.530 <span class="lb-pts">pts</span></div>
+          <span class="lb-medal">🥉</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-pos">4</span>
+          <div class="lb-avatar">IH</div>
+          <div class="lb-info">
+            <span class="lb-name">IronHand84</span>
+            <span class="lb-faction">Iron Hands</span>
+          </div>
+          <div class="lb-score">2.210 <span class="lb-pts">pts</span></div>
+        </div>
+        <div class="lb-row">
+          <span class="lb-pos">5</span>
+          <div class="lb-avatar">OR</div>
+          <div class="lb-info">
+            <span class="lb-name">OrkRider</span>
+            <span class="lb-faction">Orks</span>
+          </div>
+          <div class="lb-score">2.085 <span class="lb-pts">pts</span></div>
+        </div>
+        <div class="lb-row">
+          <span class="lb-pos">6</span>
+          <div class="lb-avatar">NE</div>
+          <div class="lb-info">
+            <span class="lb-name">NecronEternal</span>
+            <span class="lb-faction">Necrons</span>
+          </div>
+          <div class="lb-score">1.990 <span class="lb-pts">pts</span></div>
+        </div>
+        <div class="lb-row">
+          <span class="lb-pos">7</span>
+          <div class="lb-avatar">VL</div>
+          <div class="lb-info">
+            <span class="lb-name">VoidLord</span>
+            <span class="lb-faction">T'au Empire</span>
+          </div>
+          <div class="lb-score">1.840 <span class="lb-pts">pts</span></div>
+        </div>
+        <div class="lb-row">
+          <span class="lb-pos">8</span>
+          <div class="lb-avatar">BW</div>
+          <div class="lb-info">
+            <span class="lb-name">BloodWarden</span>
+            <span class="lb-faction">Blood Angels</span>
+          </div>
+          <div class="lb-score">1.720 <span class="lb-pts">pts</span></div>
+        </div>
+      </div>
+      <p class="lb-note">Clasificación actualizada tras el Torneo de Marzo · <a href="https://discord.gg/tu-servidor" target="_blank">Ver historial completo en Discord</a></p>
+    </section>
+
+    <!-- ─────────── PAGE: REGLAMENTOS ─────────── -->
+    <section class="page" id="reglamentos">
+      <div class="page-header">
+        <h2 class="page-title"><i class="fas fa-scroll"></i> Reglamentos</h2>
+        <p class="page-subtitle">Documentación oficial de la comunidad</p>
+      </div>
+
+      <div class="rules-list">
+        <div class="rule-category">
+          <div class="rule-cat-header">
+            <i class="fas fa-gavel"></i>
+            <span>Reglas Generales de la Comunidad</span>
+          </div>
+          <ul class="rule-items">
+            <li><i class="fas fa-chevron-right"></i> Respeto entre todos los miembros</li>
+            <li><i class="fas fa-chevron-right"></i> Idioma principal: español</li>
+            <li><i class="fas fa-chevron-right"></i> Prohibido spam y publicidad no autorizada</li>
+            <li><i class="fas fa-chevron-right"></i> Contenido off-topic en los canales designados</li>
+          </ul>
+        </div>
+
+        <div class="rule-category">
+          <div class="rule-cat-header">
+            <i class="fas fa-chess-rook"></i>
+            <span>Reglamento de Torneos</span>
+          </div>
+          <ul class="rule-items">
+            <li><i class="fas fa-chevron-right"></i> Listas cerradas 48h antes del torneo</li>
+            <li><i class="fas fa-chevron-right"></i> 2.000 puntos — formato estándar GW</li>
+            <li><i class="fas fa-chevron-right"></i> 3 rondas / sistema suizo</li>
+            <li><i class="fas fa-chevron-right"></i> Puntuación: Victoria 3 pts / Empate 1 / Derrota 0</li>
+            <li><i class="fas fa-chevron-right"></i> Miniaturas 100% pintadas obligatorias</li>
+          </ul>
+        </div>
+
+        <div class="rule-category">
+          <div class="rule-cat-header">
+            <i class="fas fa-paint-brush"></i>
+            <span>Concursos de Pintura</span>
+          </div>
+          <ul class="rule-items">
+            <li><i class="fas fa-chevron-right"></i> Miniatura original sin repaints de terceros</li>
+            <li><i class="fas fa-chevron-right"></i> 3 fotos mínimo (frontal, lateral, detalle)</li>
+            <li><i class="fas fa-chevron-right"></i> Votación comunitaria anónima</li>
+          </ul>
+        </div>
+
+        <div class="doc-downloads">
+          <h3 class="doc-title">📄 Documentos descargables</h3>
+          <a href="#" class="doc-btn"><i class="fas fa-file-pdf"></i> Reglamento Torneo T7 — v2.1.pdf</a>
+          <a href="#" class="doc-btn"><i class="fas fa-file-pdf"></i> FAQ Comunidad 2025.pdf</a>
+          <a href="#" class="doc-btn"><i class="fas fa-file-pdf"></i> Código de Conducta.pdf</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── PAGE: FACCIONES ─────────── -->
+    <section class="page" id="facciones">
+      <div class="page-header">
+        <h2 class="page-title"><i class="fas fa-shield-halved"></i> Facciones</h2>
+        <p class="page-subtitle">Guías y análisis de cada bando</p>
+      </div>
+
+      <div class="tier-label">Tier List — Temporada 7</div>
+      <div class="tier-list">
+        <div class="tier tier-s">
+          <div class="tier-badge">S</div>
+          <div class="tier-factions">
+            <span class="faction-tag">Space Marines</span>
+            <span class="faction-tag">Custodes</span>
+            <span class="faction-tag">Tyranids</span>
+          </div>
+        </div>
+        <div class="tier tier-a">
+          <div class="tier-badge">A</div>
+          <div class="tier-factions">
+            <span class="faction-tag">Death Guard</span>
+            <span class="faction-tag">Necrons</span>
+            <span class="faction-tag">T'au</span>
+          </div>
+        </div>
+        <div class="tier tier-b">
+          <div class="tier-badge">B</div>
+          <div class="tier-factions">
+            <span class="faction-tag">Orks</span>
+            <span class="faction-tag">Eldar</span>
+            <span class="faction-tag">Blood Angels</span>
+          </div>
+        </div>
+        <div class="tier tier-c">
+          <div class="tier-badge">C</div>
+          <div class="tier-factions">
+            <span class="faction-tag">Grey Knights</span>
+            <span class="faction-tag">Sisters</span>
+            <span class="faction-tag">Dark Eldar</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="factions-grid">
+        <div class="faction-card">
+          <div class="faction-icon" style="background:var(--gold)">⚜</div>
+          <div class="faction-info">
+            <span class="faction-name">Space Marines</span>
+            <span class="faction-tier s-tier">Tier S</span>
+          </div>
+          <a href="#" class="faction-guide-btn">Guía →</a>
+        </div>
+        <div class="faction-card">
+          <div class="faction-icon" style="background:#2d7a1f">☠</div>
+          <div class="faction-info">
+            <span class="faction-name">Death Guard</span>
+            <span class="faction-tier a-tier">Tier A</span>
+          </div>
+          <a href="#" class="faction-guide-btn">Guía →</a>
+        </div>
+        <div class="faction-card">
+          <div class="faction-icon" style="background:#1a5c8a">⬡</div>
+          <div class="faction-info">
+            <span class="faction-name">T'au Empire</span>
+            <span class="faction-tier a-tier">Tier A</span>
+          </div>
+          <a href="#" class="faction-guide-btn">Guía →</a>
+        </div>
+        <div class="faction-card">
+          <div class="faction-icon" style="background:#7a1a1a">🦷</div>
+          <div class="faction-info">
+            <span class="faction-name">Tyranids</span>
+            <span class="faction-tier s-tier">Tier S</span>
+          </div>
+          <a href="#" class="faction-guide-btn">Guía →</a>
+        </div>
+        <div class="faction-card">
+          <div class="faction-icon" style="background:#3a3a3a">💀</div>
+          <div class="faction-info">
+            <span class="faction-name">Necrons</span>
+            <span class="faction-tier a-tier">Tier A</span>
+          </div>
+          <a href="#" class="faction-guide-btn">Guía →</a>
+        </div>
+        <div class="faction-card">
+          <div class="faction-icon" style="background:#5a3a00">💥</div>
+          <div class="faction-info">
+            <span class="faction-name">Orks</span>
+            <span class="faction-tier b-tier">Tier B</span>
+          </div>
+          <a href="#" class="faction-guide-btn">Guía →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────── PAGE: GALERÍA ─────────── -->
+    <section class="page" id="galeria">
+      <div class="page-header">
+        <h2 class="page-title"><i class="fas fa-images"></i> Galería</h2>
+        <p class="page-subtitle">Las mejores pinturas de la comunidad</p>
+      </div>
+
+      <div class="gallery-filter">
+        <button class="g-filter active">Todas</button>
+        <button class="g-filter">Ejércitos</button>
+        <button class="g-filter">Héroes</button>
+        <button class="g-filter">Torneos</button>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item"><div class="gallery-placeholder gp1"><span>Space Marine Captain</span></div></div>
+        <div class="gallery-item"><div class="gallery-placeholder gp2"><span>Death Guard Army</span></div></div>
+        <div class="gallery-item"><div class="gallery-placeholder gp3"><span>Tyranid Hive Tyrant</span></div></div>
+        <div class="gallery-item"><div class="gallery-placeholder gp4"><span>Necron Overlord</span></div></div>
+        <div class="gallery-item"><div class="gallery-placeholder gp5"><span>T'au Battlesuit</span></div></div>
+        <div class="gallery-item"><div class="gallery-placeholder gp6"><span>Ork Warboss</span></div></div>
+      </div>
+
+      <div class="gallery-cta">
+        <p>¿Quieres aparecer aquí?</p>
+        <a href="https://discord.gg/tu-servidor" target="_blank" class="btn-discord-secondary">
+          <i class="fab fa-discord"></i> Comparte en Discord
+        </a>
+      </div>
+    </section>
+
+    <!-- ─────────── PAGE: EVENTOS ─────────── -->
+    <section class="page" id="eventos">
+      <div class="page-header">
+        <h2 class="page-title"><i class="fas fa-calendar-days"></i> Eventos</h2>
+        <p class="page-subtitle">Torneos, meetups y más — 2025</p>
+      </div>
+
+      <div class="events-list">
+        <div class="event-card upcoming">
+          <div class="event-card-date">
+            <span class="ec-day">10</span>
+            <span class="ec-month">MAY</span>
+          </div>
+          <div class="event-card-info">
+            <span class="ec-badge upcoming-badge">PRÓXIMO</span>
+            <h3 class="ec-name">Gran Torneo de Primavera</h3>
+            <p class="ec-location"><i class="fas fa-map-marker-alt"></i> Madrid · C/ Ejemplo 42</p>
+            <p class="ec-format">2.000 pts · Formato estándar · 8 rondas</p>
+          </div>
+          <a href="https://discord.gg/tu-servidor" target="_blank" class="ec-join">Inscribirse</a>
+        </div>
+
+        <div class="event-card upcoming">
+          <div class="event-card-date">
+            <span class="ec-day">24</span>
+            <span class="ec-month">MAY</span>
+          </div>
+          <div class="event-card-info">
+            <span class="ec-badge upcoming-badge">PRÓXIMO</span>
+            <h3 class="ec-name">Painting Contest — Heroes</h3>
+            <p class="ec-location"><i class="fas fa-globe"></i> Online (Discord)</p>
+            <p class="ec-format">Categoría: personaje único · Votación comunidad</p>
+          </div>
+          <a href="https://discord.gg/tu-servidor" target="_blank" class="ec-join">Participar</a>
+        </div>
+
+        <div class="event-card past">
+          <div class="event-card-date past-date">
+            <span class="ec-day">15</span>
+            <span class="ec-month">MAR</span>
+          </div>
+          <div class="event-card-info">
+            <span class="ec-badge past-badge">FINALIZADO</span>
+            <h3 class="ec-name">Torneo Invierno 2025</h3>
+            <p class="ec-location"><i class="fas fa-map-marker-alt"></i> Barcelona</p>
+            <p class="ec-format">Ganador: GrimSword (Space Marines)</p>
+          </div>
+          <span class="ec-result">Ver resultados →</span>
+        </div>
+
+        <div class="event-card past">
+          <div class="event-card-date past-date">
+            <span class="ec-day">02</span>
+            <span class="ec-month">FEB</span>
+          </div>
+          <div class="event-card-info">
+            <span class="ec-badge past-badge">FINALIZADO</span>
+            <h3 class="ec-name">League Night — Enero</h3>
+            <p class="ec-location"><i class="fas fa-globe"></i> Online (Tabletop Sim)</p>
+            <p class="ec-format">Partidas de liga · 8 participantes</p>
+          </div>
+          <span class="ec-result">Ver resultados →</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══════════════════════════ BOTTOM NAV ══════════════════════════ -->
+  <nav class="bottom-nav">
+    <a class="bn-item active" onclick="openPage('inicio')" data-page="inicio">
+      <i class="fas fa-home"></i><span>Inicio</span>
+    </a>
+    <a class="bn-item" onclick="openPage('clasificacion')" data-page="clasificacion">
+      <i class="fas fa-trophy"></i><span>Ranking</span>
+    </a>
+    <a class="bn-item" onclick="openPage('reglamentos')" data-page="reglamentos">
+      <i class="fas fa-scroll"></i><span>Reglas</span>
+    </a>
+    <a class="bn-item" onclick="openPage('facciones')" data-page="facciones">
+      <i class="fas fa-shield-halved"></i><span>Facciones</span>
+    </a>
+    <a class="bn-item" onclick="openPage('eventos')" data-page="eventos">
+      <i class="fas fa-calendar-days"></i><span>Eventos</span>
+    </a>
+  </nav>
+
+  <!-- ══════════════════════════ SCRIPT ══════════════════════════ -->
+  <script>
+    // ── Page navigation ──
+    function openPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.bn-item').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+      const page = document.getElementById(pageId);
+      if (page) { page.classList.add('active'); page.scrollIntoView({behavior:'smooth', block:'start'}); }
+
+      document.querySelectorAll(`[data-page="${pageId}"]`).forEach(el => el.classList.add('active'));
+      closeNav();
+    }
+
+    // ── Hamburger nav ──
+    const hamburger = document.getElementById('hamburger');
+    const navOverlay = document.getElementById('navOverlay');
+    const navClose = document.getElementById('navClose');
+
+    hamburger.addEventListener('click', () => {
+      navOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeNav() {
+      navOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    navClose.addEventListener('click', closeNav);
+    navOverlay.addEventListener('click', e => { if (e.target === navOverlay) closeNav(); });
+
+    // ── Nav link click ──
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        openPage(link.dataset.page);
+      });
+    });
+
+    // ── Bottom nav click ──
+    document.querySelectorAll('.bn-item').forEach(item => {
+      item.addEventListener('click', e => e.preventDefault());
+    });
+
+    // ── Season tabs ──
+    document.querySelectorAll('.s-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.s-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
+    });
+
+    // ── Gallery filter ──
+    document.querySelectorAll('.g-filter').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.g-filter').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
