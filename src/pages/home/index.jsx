@@ -2,7 +2,7 @@ import { useState, Suspense, lazy } from 'react'
 import { motion } from 'framer-motion'
 import { BookOpen, User, Users } from 'lucide-react'
 
-const IndividualRules = lazy(() => import('../rules/IndividualRules'))
+const IndividualRules = lazy(() => import('../rules/individualrules'))
 const TeamRules       = lazy(() => import('../rules/teamrules'))
 
 const TABS = [
