@@ -1,0 +1,62 @@
+{
+  "title": "Reglas — Torneos Individuales",
+  "version": "2.1",
+  "lastUpdated": "2025-04-01",
+  "sections": [
+    {
+      "title": "Formato General",
+      "icon": "layout",
+      "rules": [
+        "Cada torneo constará de una fase de grupos y una fase eliminatoria directa.",
+        "La fase de grupos está compuesta por 3 rondas con rivales dentro del mismo grupo.",
+        "Los 2 primeros clasificados de cada grupo avanzan a la fase eliminatoria.",
+        "La fase eliminatoria es en formato single-elimination (cuartos, semis, final).",
+        "Se disputará un partido por el 3er y 4º puesto."
+      ]
+    },
+    {
+      "title": "Configuración de Partidas",
+      "icon": "settings",
+      "rules": [
+        "Los partidos se juegan en Tabletop Simulator con la configuración oficial de la comunidad.",
+        "El tamaño de lista estándar es de 2000 puntos.",
+        "Cada partida tiene una duración máxima de 3 horas.",
+        "En caso de empate al finalizar el tiempo, gana quien tenga más puntos de victoria.",
+        "Los jugadores deben tener la lista verificada y subida antes del inicio del torneo."
+      ]
+    },
+    {
+      "title": "Listas y Facciones",
+      "icon": "shield",
+      "rules": [
+        "Las listas deben construirse con las reglas vigentes de la edición actual.",
+        "Se permiten todas las facciones del juego sin restricciones.",
+        "Las listas deben subirse a través del formulario oficial antes de la fecha límite.",
+        "No se permiten cambios en la lista una vez cerrado el plazo de inscripción.",
+        "Las listas serán públicas al inicio de cada ronda."
+      ]
+    },
+    {
+      "title": "Sistema de Puntuación",
+      "icon": "trophy",
+      "rules": [
+        "Victoria: 3 puntos de torneo.",
+        "Derrota: 0 puntos de torneo.",
+        "No existen empates; en caso de igualdad de puntos de victoria se aplican desempates.",
+        "Los puntos de victoria en las partidas sirven como desempate dentro del grupo.",
+        "El ranking global acumula puntos según posición final: 1º=35, 2º=28, 3º=22, 4º=18, y así sucesivamente."
+      ]
+    },
+    {
+      "title": "Conducta y Fair Play",
+      "icon": "users",
+      "rules": [
+        "Se espera un comportamiento deportivo y respetuoso en todo momento.",
+        "Las discrepancias en reglas deben reportarse al árbitro del torneo.",
+        "El uso de modificaciones no autorizadas en TTS conlleva descalificación inmediata.",
+        "Los jugadores deben estar disponibles 10 minutos antes del inicio de cada ronda.",
+        "Las ausencias no justificadas resultan en derrota por incomparecencia."
+      ]
+    }
+  ]
+}

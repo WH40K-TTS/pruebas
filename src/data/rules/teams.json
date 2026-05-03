@@ -1,0 +1,62 @@
+{
+  "title": "Reglas — Torneos por Equipos",
+  "version": "1.3",
+  "lastUpdated": "2025-04-01",
+  "sections": [
+    {
+      "title": "Composición de Equipos",
+      "icon": "users",
+      "rules": [
+        "Cada equipo está compuesto por 4 jugadores y 1 capitán (que también juega).",
+        "Los equipos deben registrarse completos antes de la fecha límite de inscripción.",
+        "No se permiten jugadores sin equipo o sustituciones salvo causa mayor justificada.",
+        "El capitán es el portavoz oficial del equipo y el responsable ante la organización.",
+        "Cada jugador del equipo debe usar una facción diferente."
+      ]
+    },
+    {
+      "title": "Formato de Enfrentamientos",
+      "icon": "layout",
+      "rules": [
+        "Cada enfrentamiento entre equipos consiste en 4 partidas simultáneas (1 por jugador).",
+        "El equipo que gane más partidas individuales (mínimo 3 de 4) gana el enfrentamiento.",
+        "En caso de empate 2-2, se disputa una partida de desempate entre los capitanes.",
+        "La asignación de rivales entre equipos la determina el sistema de emparejamiento aleatorio ponderado.",
+        "Los capitanes deben acordar los emparejamientos individuales antes de cada ronda."
+      ]
+    },
+    {
+      "title": "Estrategia de Selección",
+      "icon": "target",
+      "rules": [
+        "Los capitanes declaran simultáneamente 1 jugador bloqueado del rival (no puede ser emparejado con un jugador propio específico).",
+        "El proceso de selección sigue el orden: bloqueo → oferta → contraoferta → asignación final.",
+        "Los intercambios de facción entre miembros del propio equipo no están permitidos.",
+        "Toda la comunicación de selección se realiza en el canal dedicado de Discord del torneo.",
+        "El capitán tiene 5 minutos para completar el proceso de selección o pierde el derecho a bloquear."
+      ]
+    },
+    {
+      "title": "Puntuación de Equipos",
+      "icon": "trophy",
+      "rules": [
+        "Victoria de equipo: 3 puntos de torneo de equipo.",
+        "Derrota de equipo: 0 puntos de torneo de equipo.",
+        "El marcador total de partidas individuales actúa como desempate (e.g., 16-8 vs 12-9).",
+        "El ranking de equipos se calcula por puntos de torneo, luego por diferencia de partidas.",
+        "Los jugadores acumulan puntos individuales para el ranking personal independientemente del resultado del equipo."
+      ]
+    },
+    {
+      "title": "Comunicación Durante las Partidas",
+      "icon": "message-square",
+      "rules": [
+        "Los jugadores solo pueden comunicarse con sus compañeros de equipo entre rondas, no durante la partida.",
+        "Queda prohibido el coaching externo durante una partida activa.",
+        "Los espectadores pueden seguir las partidas pero no pueden interactuar con los jugadores.",
+        "Los incidentes técnicos deben reportarse de inmediato al árbitro mediante el canal de Discord.",
+        "En caso de desconexión, el jugador tiene 15 minutos para reconectarse antes de que se aplique derrota."
+      ]
+    }
+  ]
+}

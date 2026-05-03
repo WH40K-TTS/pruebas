@@ -1,0 +1,54 @@
+{
+  "tournaments": [
+    {
+      "id": "tournament-001",
+      "name": "Torneo Primavera 2025",
+      "date": "2025-05-10",
+      "status": "finished",
+      "format": "individual",
+      "players": 16,
+      "winner": "Velarion",
+      "description": "Torneo individual de primavera. Fase de grupos + eliminación directa."
+    },
+    {
+      "id": "tournament-002",
+      "name": "Copa Invernal 2024",
+      "date": "2024-12-14",
+      "status": "finished",
+      "format": "individual",
+      "players": 12,
+      "winner": "KhazarBlood",
+      "description": "Copa especial de diciembre con reglas modificadas de invierno."
+    },
+    {
+      "id": "tournament-003",
+      "name": "Torneo Otoño 2024",
+      "date": "2024-10-05",
+      "status": "finished",
+      "format": "individual",
+      "players": 16,
+      "winner": "Velarion",
+      "description": "Torneo estándar de temporada."
+    },
+    {
+      "id": "tournament-004",
+      "name": "Grand Open 2024",
+      "date": "2024-07-20",
+      "status": "finished",
+      "format": "individual",
+      "players": 32,
+      "winner": "IronVeil",
+      "description": "El torneo más grande del año con 32 participantes."
+    },
+    {
+      "id": "tournament-005",
+      "name": "Torneo Verano 2025",
+      "date": "2025-07-12",
+      "status": "upcoming",
+      "format": "individual",
+      "players": null,
+      "winner": null,
+      "description": "Próximo torneo de verano. ¡Inscripciones abiertas!"
+    }
+  ]
+}
