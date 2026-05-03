@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Trophy, BookOpen, BarChart2, MessageCircle, ChevronRight, Hexagon } from 'lucide-react'
-import Button from '../../components/ui/Button'
-import Card from '../../components/ui/Card'
+import Button from '../../components/ui/button'
+import Card from '../../components/ui/card'
 
-const DISCORD_URL   = 'https://discord.gg/tu-invite-aqui'
+const DISCORD_URL   = 'https://discord.gg/4uHrQp2ckW'
 
 const FEATURES = [
   {
