@@ -1,7 +1,7 @@
 import { ChevronRight } from 'lucide-react'
 
 /**
- * Fila de resultado de partida.
+ * Fila de resultado de partida con diseño Premium Dark.
  * @param {{ player1, score1, player2, score2, winner }} match
  */
 export default function MatchRow({ match }) {
@@ -11,23 +11,23 @@ export default function MatchRow({ match }) {
   const p2Wins = player2 === winner
 
   return (
-    <div className="flex items-center gap-3 py-2.5 px-4 rounded border border-slate-800/60 bg-slate-900/50 hover:bg-slate-800/40 transition-colors">
+    <div className="flex items-center gap-3 py-3 px-4 rounded-xl border border-white/10 glass-panel hover:border-brand-accent/30 transition-all duration-200 group">
       {/* Jugador 1 */}
       <div className={[
-        'flex-1 text-right font-display font-semibold text-sm',
-        p1Wins ? 'text-white' : 'text-slate-500',
+        'flex-1 text-right font-display font-semibold text-sm transition-colors',
+        p1Wins ? 'text-white text-glow-gold' : 'text-slate-400 group-hover:text-slate-300',
       ].join(' ')}>
         {player1}
       </div>
 
       {/* Marcador */}
-      <div className="flex items-center gap-1 shrink-0">
+      <div className="flex items-center gap-2 shrink-0">
         {/* Score 1 */}
         <span className={[
-          'w-8 h-8 flex items-center justify-center rounded font-mono font-bold text-sm',
+          'w-9 h-9 flex items-center justify-center rounded-lg font-mono font-bold text-sm transition-all',
           p1Wins
-            ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
-            : 'bg-slate-800 text-slate-500 border border-slate-700/50',
+            ? 'bg-brand-accent/20 text-brand-accent border border-brand-accent/40 shadow-[0_0_10px_rgba(250,204,21,0.2)]'
+            : 'bg-brand-deep text-slate-500 border border-white/10',
         ].join(' ')}>
           {score1}
         </span>
@@ -36,10 +36,10 @@ export default function MatchRow({ match }) {
 
         {/* Score 2 */}
         <span className={[
-          'w-8 h-8 flex items-center justify-center rounded font-mono font-bold text-sm',
+          'w-9 h-9 flex items-center justify-center rounded-lg font-mono font-bold text-sm transition-all',
           p2Wins
-            ? 'bg-amber-500/20 text-amber-400 border border-amber-500/40'
-            : 'bg-slate-800 text-slate-500 border border-slate-700/50',
+            ? 'bg-brand-accent/20 text-brand-accent border border-brand-accent/40 shadow-[0_0_10px_rgba(250,204,21,0.2)]'
+            : 'bg-brand-deep text-slate-500 border border-white/10',
         ].join(' ')}>
           {score2}
         </span>
@@ -47,16 +47,16 @@ export default function MatchRow({ match }) {
 
       {/* Jugador 2 */}
       <div className={[
-        'flex-1 text-left font-display font-semibold text-sm',
-        p2Wins ? 'text-white' : 'text-slate-500',
+        'flex-1 text-left font-display font-semibold text-sm transition-colors',
+        p2Wins ? 'text-white text-glow-gold' : 'text-slate-400 group-hover:text-slate-300',
       ].join(' ')}>
         {player2}
       </div>
 
       {/* Ganador indicador */}
-      <div className="hidden md:flex items-center gap-1 text-xs font-mono text-amber-500/60 w-28 shrink-0">
-        <ChevronRight size={12} />
-        <span>{winner}</span>
+      <div className="hidden md:flex items-center gap-1 text-xs font-mono text-brand-accent/60 w-32 shrink-0">
+        <ChevronRight size={12} className="text-brand-accent" />
+        <span className="truncate">{winner}</span>
       </div>
     </div>
   )

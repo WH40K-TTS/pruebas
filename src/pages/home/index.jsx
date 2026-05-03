@@ -12,8 +12,8 @@ const FEATURES = [
     title: 'Torneos',
     description: 'Grupos, clasificaciones y brackets eliminatorios actualizados en tiempo real.',
     to: '/tournament',
-    color: 'text-amber-400',
-    border: 'hover:border-amber-500/50',
+    color: 'text-brand-accent',
+    border: 'hover:border-brand-accent/50',
   },
   {
     icon: BookOpen,
@@ -48,12 +48,12 @@ export default function Home() {
       {/* ── Hero ── */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         {/* Background layers */}
-        <div className="absolute inset-0 bg-slate-950" />
+        <div className="absolute inset-0 bg-brand-darkest" />
         <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-100" />
-        <div className="absolute inset-0 bg-hero-gradient" />
+        <div className="absolute inset-0 bg-premium-glow" />
         {/* Decorative hex */}
         <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 opacity-5 pointer-events-none">
-          <Hexagon size={600} strokeWidth={0.5} className="text-amber-400" />
+          <Hexagon size={600} strokeWidth={0.5} className="text-brand-accent" />
         </div>
 
         <div className="relative mx-auto max-w-7xl px-6 py-24">
@@ -63,15 +63,15 @@ export default function Home() {
             transition={{ duration: 0.7, ease: 'easeOut' }}
           >
             {/* Eyebrow */}
-            <p className="flex items-center gap-2 font-mono text-xs text-amber-500 uppercase tracking-[0.2em] mb-5">
-              <span className="inline-block w-6 h-px bg-amber-500" />
+            <p className="flex items-center gap-2 font-mono text-xs text-brand-accent uppercase tracking-[0.2em] mb-5">
+              <span className="inline-block w-6 h-px bg-brand-accent" />
               Comunidad competitiva · Tabletop Simulator
             </p>
 
             {/* Heading */}
             <h1 className="font-display text-5xl md:text-7xl font-bold text-white leading-none tracking-tight mb-6">
               Forja tu<br />
-              <span className="text-amber-400">legado</span>
+              <span className="text-brand-accent text-glow-gold">legado</span>
               <span className="text-slate-600"> en el tablero.</span>
             </h1>
 
@@ -132,7 +132,7 @@ export default function Home() {
                 className={`block p-6 group ${border}`}
               >
                 <Icon size={28} className={`${color} mb-4`} strokeWidth={1.5} />
-                <h3 className="font-display text-xl font-semibold text-white mb-2 group-hover:text-amber-300 transition-colors">
+                <h3 className="font-display text-xl font-semibold text-white mb-2 group-hover:text-brand-highlight transition-colors">
                   {title}
                 </h3>
                 <p className="font-body text-slate-400 text-sm leading-relaxed">
@@ -151,7 +151,7 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-6 pb-24">
         <Card glowing className="relative overflow-hidden px-8 py-12 md:px-14 md:py-16 text-center">
           {/* bg deco */}
-          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/10 to-transparent pointer-events-none" />
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}

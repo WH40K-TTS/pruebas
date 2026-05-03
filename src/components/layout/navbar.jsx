@@ -15,15 +15,15 @@ export default function Navbar() {
 
   function linkClass({ isActive }) {
     return [
-      'font-display font-medium tracking-wide text-sm transition-colors duration-200 uppercase',
+      'font-display font-medium tracking-wide text-sm transition-all duration-200 uppercase',
       isActive
-        ? 'text-amber-400'
-        : 'text-slate-400 hover:text-amber-300',
+        ? 'text-brand-accent text-glow-gold'
+        : 'text-slate-400 hover:text-brand-highlight',
     ].join(' ')
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-40 border-b border-white/10 bg-brand-darkest/90 backdrop-blur-md">
       <nav
         className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:px-6"
         aria-label="Navegación principal"
@@ -36,11 +36,11 @@ export default function Navbar() {
         >
           <Hexagon
             size={22}
-            className="text-amber-500 group-hover:text-amber-400 transition-colors"
+            className="text-brand-accent group-hover:text-brand-highlight transition-colors"
             strokeWidth={1.5}
           />
           <span className="font-display font-bold text-lg text-white tracking-widest uppercase">
-            TTS<span className="text-amber-500">.</span>
+            TTS<span className="text-brand-accent">.</span>
           </span>
         </Link>
 
@@ -57,7 +57,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden p-2 text-slate-400 hover:text-amber-400 transition-colors"
+          className="md:hidden p-2 text-slate-400 hover:text-brand-accent transition-colors"
           onClick={() => setOpen(v => !v)}
           aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={open}
@@ -74,7 +74,7 @@ export default function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="overflow-hidden border-b border-slate-800/80 bg-slate-950/95 md:hidden"
+            className="overflow-hidden border-b border-white/10 bg-brand-darkest/95 md:hidden"
           >
             <ul className="flex flex-col gap-0 px-4 py-3" role="list">
               {NAV_LINKS.map(({ to, label }) => (
@@ -85,7 +85,7 @@ export default function Navbar() {
                     end={to === '/'}
                     onClick={() => setOpen(false)}
                   >
-                    <span className="block py-3 border-b border-slate-800/60 last:border-0">
+                    <span className="block py-3 border-b border-white/5 last:border-0">
                       {label}
                     </span>
                   </NavLink>

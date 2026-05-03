@@ -13,15 +13,19 @@ export default function IndividualRules() {
   }, [])
 
   if (loading) return null
-  if (!data)   return <p className="text-slate-500">Error cargando las reglas.</p>
+  if (!data)   return <p className="text-slate-500 font-body">Error cargando las reglas.</p>
 
   return (
-    <div>
-      <div className="flex items-center justify-between mb-6">
-        <p className="font-body text-slate-400 text-sm">{data.description}</p>
-        <span className="font-mono text-xs text-slate-600">v{data.version}</span>
+    <div className="animate-fade-in">
+      <div className="flex items-center justify-between mb-8">
+        <p className="font-body text-slate-400 text-sm max-w-2xl leading-relaxed">
+          {data.description}
+        </p>
+        <span className="font-mono text-[10px] text-slate-600 uppercase tracking-widest border border-white/10 px-2 py-1 rounded-lg bg-white/5">
+          v{data.version}
+        </span>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-6">
         {data.sections.map((section, idx) => (
           <RuleSection key={idx} section={section} index={idx} />
         ))}

@@ -1,15 +1,15 @@
 /**
- * Table — tabla accesible con caption y scope.
+ * Table — tabla accesible con diseño Premium Dark, caption y scope.
  */
 export default function Table({ caption, columns, rows, onRowClick, className = '' }) {
   return (
-    <div className={`w-full overflow-x-auto rounded-lg border border-slate-700/60 ${className}`}>
+    <div className={`w-full overflow-x-auto rounded-2xl border border-white/10 glass-panel ${className}`}>
       <table className="w-full text-sm">
         {caption && (
           <caption className="sr-only">{caption}</caption>
         )}
         <thead>
-          <tr className="border-b border-slate-700/60 bg-slate-800/60">
+          <tr className="border-b border-white/10 bg-brand-deep/50">
             {columns.map((col) => (
               <th
                 key={col.key}
@@ -31,9 +31,9 @@ export default function Table({ caption, columns, rows, onRowClick, className = 
               key={row.id ?? idx}
               onClick={onRowClick ? () => onRowClick(row) : undefined}
               className={[
-                'border-b border-slate-800/60 transition-colors',
-                onRowClick ? 'cursor-pointer hover:bg-slate-800/40' : '',
-                idx % 2 === 0 ? '' : 'bg-slate-800/20',
+                'border-b border-white/5 transition-colors duration-200',
+                onRowClick ? 'cursor-pointer hover:bg-brand-accent/10' : '',
+                idx % 2 === 0 ? 'bg-transparent' : 'bg-brand-deep/20',
               ].join(' ')}
             >
               {columns.map((col) => (

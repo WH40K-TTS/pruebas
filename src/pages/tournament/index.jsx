@@ -26,12 +26,12 @@ function TournamentList() {
   return (
     <main className="mx-auto max-w-4xl px-6 py-12">
       <div className="mb-10">
-        <p className="font-mono text-xs text-amber-500 uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
-          <span className="w-6 h-px bg-amber-500 inline-block" />
+        <p className="font-mono text-xs text-brand-accent uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+          <span className="w-6 h-px bg-brand-accent inline-block" />
           Todos los torneos
         </p>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-white flex items-center gap-4">
-          <Trophy size={32} className="text-amber-400" strokeWidth={1.5} />
+          <Trophy size={32} className="text-brand-accent" strokeWidth={1.5} />
           Torneos
         </h1>
       </div>
@@ -39,7 +39,7 @@ function TournamentList() {
       {loading ? (
         <div className="space-y-3 animate-pulse">
           {[...Array(4)].map((_, i) => (
-            <div key={i} className="h-20 rounded-lg border border-slate-800 bg-slate-900/40" />
+            <div key={i} className="h-20 rounded-2xl border border-white/10 bg-brand-deep/40" />
           ))}
         </div>
       ) : (
@@ -54,7 +54,7 @@ function TournamentList() {
                 interactive
                 className="flex items-center justify-between px-5 py-4"
               >
-                <div>
+                <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <h2 className="font-display font-semibold text-white text-base">{t.name}</h2>
                     <Badge color={status.color}>{status.label}</Badge>
@@ -70,7 +70,7 @@ function TournamentList() {
                     )}
                   </p>
                 </div>
-                <ChevronRight size={16} className="text-slate-600 shrink-0" />
+                <ChevronRight size={16} className="text-slate-600 shrink-0 group-hover:text-brand-accent transition-colors" />
               </Card>
             )
           })}
@@ -87,14 +87,14 @@ function TournamentDetail({ id }) {
 
   if (loading) return (
     <main className="mx-auto max-w-5xl px-6 py-12">
-      <div className="h-10 w-64 bg-slate-800 rounded animate-pulse mb-4" />
-      <div className="h-6 w-48 bg-slate-800/60 rounded animate-pulse" />
+      <div className="h-10 w-64 bg-brand-deep rounded-xl animate-pulse mb-4" />
+      <div className="h-6 w-48 bg-brand-deep/60 rounded-lg animate-pulse" />
     </main>
   )
 
   if (error) return (
     <main className="mx-auto max-w-5xl px-6 py-12">
-      <p className="text-red-400 border border-red-500/30 rounded px-4 py-3 bg-red-500/10">{error}</p>
+      <p className="text-brand-danger border border-brand-danger/30 rounded-xl px-4 py-3 bg-brand-danger/10">{error}</p>
     </main>
   )
 
@@ -106,14 +106,14 @@ function TournamentDetail({ id }) {
     <main className="mx-auto max-w-5xl px-6 py-12">
       {/* Breadcrumb */}
       <p className="font-mono text-xs text-slate-600 mb-6">
-        <Link to="/tournament" className="hover:text-amber-400 transition-colors">Torneos</Link>
+        <Link to="/tournament" className="hover:text-brand-accent transition-colors">Torneos</Link>
         {' / '}
         <span className="text-slate-400">{tournament.name}</span>
       </p>
 
       {/* Header */}
       <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
-        <div>
+        <div className="flex-1">
           <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">
             {tournament.name}
           </h1>
@@ -126,7 +126,7 @@ function TournamentDetail({ id }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-1 mb-8 border-b border-slate-800/60 overflow-x-auto">
+      <div className="flex gap-1 mb-8 border-b border-white/10 overflow-x-auto scrollbar-hide">
         {TABS.map(({ id, label, icon: Icon }) => {
           const isActive = activeTab === id
           return (
@@ -135,7 +135,7 @@ function TournamentDetail({ id }) {
               onClick={() => setActiveTab(id)}
               className={[
                 'relative flex items-center gap-2 px-4 py-3 font-display font-medium text-xs uppercase tracking-wide transition-colors whitespace-nowrap shrink-0',
-                isActive ? 'text-amber-400' : 'text-slate-500 hover:text-slate-300',
+                isActive ? 'text-brand-accent text-glow-gold' : 'text-slate-500 hover:text-slate-300',
               ].join(' ')}
               aria-selected={isActive}
               role="tab"
@@ -145,7 +145,7 @@ function TournamentDetail({ id }) {
               {isActive && (
                 <motion.div
                   layoutId="tournament-tab"
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-amber-500"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-accent"
                   transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                 />
               )}
@@ -155,7 +155,7 @@ function TournamentDetail({ id }) {
       </div>
 
       {/* Tab content */}
-      <Suspense fallback={<div className="h-40 animate-pulse bg-slate-900/40 rounded-lg border border-slate-800" />}>
+      <Suspense fallback={<div className="h-40 animate-pulse bg-brand-deep/40 rounded-2xl border border-white/10" />}>
         <motion.div
           key={activeTab}
           initial={{ opacity: 0, y: 6 }}

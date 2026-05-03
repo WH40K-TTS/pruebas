@@ -2,7 +2,7 @@ import { Upload, ExternalLink, Info } from 'lucide-react'
 import Card from '../../components/ui/card'
 
 /**
- * Sección de subida de lista.
+ * Sección de subida de lista con diseño Premium Dark.
  * Integra el formulario Tally.so mediante iframe embed.
  */
 export default function ListUpload({ tournament }) {
@@ -21,7 +21,7 @@ export default function ListUpload({ tournament }) {
     return (
       <Card className="px-6 py-10 text-center">
         <Info size={28} className="text-slate-600 mx-auto mb-3" />
-        <p className="font-display font-semibold text-slate-400 text-base">
+        <p className="font-display font-semibold text-white text-base">
           Este torneo ha finalizado.
         </p>
         <p className="font-body text-slate-500 text-sm mt-1">
@@ -45,9 +45,9 @@ export default function ListUpload({ tournament }) {
   return (
     <div className="space-y-4">
       {/* Info card */}
-      <Card className="flex items-start gap-3 px-5 py-4">
-        <Info size={16} className="text-amber-500 mt-0.5 shrink-0" />
-        <div>
+      <Card className="flex items-start gap-3 px-5 py-4 border-left-gold">
+        <Info size={16} className="text-brand-accent mt-0.5 shrink-0" />
+        <div className="flex-1">
           <p className="font-display font-medium text-slate-200 text-sm">
             Sube tu lista antes de que empiece el torneo.
           </p>
@@ -58,7 +58,7 @@ export default function ListUpload({ tournament }) {
       </Card>
 
       {/* Tally embed */}
-      <Card className="overflow-hidden p-0">
+      <Card className="overflow-hidden p-0 shadow-2xl shadow-black/50">
         <iframe
           src={embedUrl}
           width="100%"
@@ -79,7 +79,7 @@ export default function ListUpload({ tournament }) {
           href={externalUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-amber-400 hover:text-amber-300 inline-flex items-center gap-1"
+          className="text-brand-accent hover:text-brand-highlight inline-flex items-center gap-1 transition-colors"
         >
           Ábrelo en una nueva pestaña <ExternalLink size={11} />
         </a>

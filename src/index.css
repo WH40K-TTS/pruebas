@@ -15,35 +15,31 @@
   }
 
   body {
-    @apply bg-slate-950 text-slate-200 font-body;
+    @apply bg-brand-darkest text-slate-200 font-body;
     min-height: 100vh;
+    background-image: theme('backgroundImage.grid-pattern');
+    background-size: theme('backgroundSize.grid');
   }
 
-  /* Scrollbar personalizada */
+  /* Scrollbar personalizada Premium */
   ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-slate-900;
+    @apply bg-brand-darkest;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-slate-700 rounded-full;
+    @apply bg-brand-deep rounded-full border-2 border-brand-darkest;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-amber-500/60;
+    @apply bg-brand-accent/60;
   }
 
   /* Selección de texto */
   ::selection {
-    @apply bg-amber-500/30 text-white;
+    @apply bg-brand-accent/30 text-white;
   }
-}
-
-/* ── SPA redirect script (GitHub Pages) ── */
-/* Procesa el redirect codificado en el 404.html */
-@layer base {
-  /* No CSS needed — handled in main.jsx */
 }
 
 /* ── Utilidades personalizadas ── */
@@ -58,14 +54,19 @@
     font-family: 'DM Mono', monospace;
   }
 
-  /* Glow text ámbar */
-  .text-glow-amber {
-    text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+  /* Glow text dorado premium */
+  .text-glow-gold {
+    text-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
   }
 
-  /* Línea decorativa lateral */
-  .border-left-accent {
-    border-left: 2px solid theme('colors.amber.500');
-    padding-left: theme('spacing.3');
+  /* Glassmorphism effect */
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+
+  /* Línea decorativa lateral Gold */
+  .border-left-gold {
+    border-left: 3px solid theme('colors.brand.accent');
+    padding-left: theme('spacing.4');
   }
 }
