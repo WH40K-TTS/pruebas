@@ -24,13 +24,13 @@ const SIZES = {
  * Botón reutilizable con variantes de estilo.
  */
 const Button = forwardRef(function Button(
-  { variant = 'primary', size = 'md', className = '', children, disabled, ...props },
+  { as: Component = 'button', variant = 'primary', size = 'md', className = '', children, disabled, ...props },
   ref
 ) {
   return (
-    <button
+    <Component
       ref={ref}
-      disabled={disabled}
+      disabled={Component === 'button' ? disabled : undefined}
       className={[
         'inline-flex items-center justify-center gap-2 rounded font-display tracking-wide',
         'transition-all duration-200 cursor-pointer select-none',
@@ -43,7 +43,7 @@ const Button = forwardRef(function Button(
       {...props}
     >
       {children}
-    </button>
+    </Component>
   )
 })
 
