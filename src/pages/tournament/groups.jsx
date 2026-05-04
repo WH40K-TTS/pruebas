@@ -1,34 +1,30 @@
+import React from 'react'
 import GroupCard from '../../components/tournament/groupcard'
-import { motion } from 'framer-motion'
 
-export default function Groups({ tournament }) {
-  const groups = tournament?.groups ?? []
-
-  if (groups.length === 0) {
-    return (
-      <p className="font-body text-slate-500 text-sm text-center py-10 border border-dashed border-white/10 rounded-2xl bg-brand-deep/20">
-        Los grupos aún no están disponibles.
+export default function Groups({ groups }) {
+  if (!groups?.length) return (
+    <div className="text-center py-16">
+      <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#5a4920]">
+        Los grupos aún no han sido asignados
       </p>
-    )
-  }
+    </div>
+  )
 
   return (
-    <div className="animate-fade-in">
-      <p className="font-body text-slate-400 text-xs mb-5 flex items-center gap-2">
-        Los jugadores marcados con{' '}
-        <span className="text-brand-accent font-mono font-bold bg-brand-accent/10 px-1 rounded">↑</span>{' '}
-        avanzan a la fase eliminatoria.
-      </p>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        {groups.map((group, idx) => (
-          <motion.div
-            key={group.name}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.08, duration: 0.35 }}
-          >
-            <GroupCard group={group} />
-          </motion.div>
+    <div>
+      <div className="flex items-center gap-3 mb-8">
+        <p className="font-heading text-[10px] tracking-[0.35em] uppercase text-[#5a4920] shrink-0">
+          ✦ Fase de Grupos ✦
+        </p>
+        <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, #3a2d10, transparent)' }} />
+        <span className="font-heading text-[10px] tracking-[0.2em] uppercase text-[#5a4920] shrink-0">
+          {groups.length} grupos
+        </span>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {groups.map((group, i) => (
+          <GroupCard key={i} group={group} />
         ))}
       </div>
     </div>

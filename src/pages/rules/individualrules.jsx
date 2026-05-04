@@ -1,35 +1,33 @@
-import { useEffect, useState } from 'react'
+import React from 'react'
+import { useRules } from '../../hooks/useRules'
 import RuleSection from './rulesection'
 
 export default function IndividualRules() {
-  const [data, setData]       = useState(null)
-  const [loading, setLoading] = useState(true)
+  const { sections, loading, error } = useRules('individual')
 
-  useEffect(() => {
-    import('../../data/rules/individual.json').then(m => {
-      setData(m.default)
-      setLoading(false)
-    })
-  }, [])
+  if (loading) return (
+    <div className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#5a4920] animate-pulse py-8 text-center">
+      Cargando reglamento…
+    </div>
+  )
 
-  if (loading) return null
-  if (!data)   return <p className="text-slate-500 font-body">Error cargando las reglas.</p>
+  if (error) return (
+    <div className="border border-[#5c1010] bg-[#1a0c0c] px-5 py-4 text-[#cc4444] font-body text-sm">
+      Error al cargar las reglas individuales.
+    </div>
+  )
 
   return (
-    <div className="animate-fade-in">
-      <div className="flex items-center justify-between mb-8">
-        <p className="font-body text-slate-400 text-sm max-w-2xl leading-relaxed">
-          {data.description}
-        </p>
-        <span className="font-mono text-[10px] text-slate-600 uppercase tracking-widest border border-white/10 px-2 py-1 rounded-lg bg-white/5">
-          v{data.version}
+    <div>
+      <div className="flex items-center gap-3 mb-6">
+        <span className="font-heading text-[10px] tracking-[0.35em] uppercase text-[#5a4920]">
+          ✦ Formato Individual ✦
         </span>
+        <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, #3a2d10, transparent)' }} />
       </div>
-      <div className="space-y-6">
-        {data.sections.map((section, idx) => (
-          <RuleSection key={idx} section={section} index={idx} />
-        ))}
-      </div>
+      {sections?.map((section, i) => (
+        <RuleSection key={i} section={section} index={i} />
+      ))}
     </div>
   )
 }

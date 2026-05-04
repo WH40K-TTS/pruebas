@@ -1,72 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400;1,600&family=Courier+Prime:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ── Base ── */
-@layer base {
-  *, *::before, *::after {
-    box-sizing: border-box;
-  }
+/* ─── CSS Variables ──────────────────────────────────────────── */
+:root {
+  --void:           #0d0b08;
+  --void-50:        #1a1510;
+  --void-100:       #161209;
 
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  --gold:           #c9a84c;
+  --gold-light:     #e8c96a;
+  --gold-dark:      #8a6f2e;
+  --gold-dim:       #5a4920;
+  --gold-pale:      #f0dfa0;
 
-  body {
-    @apply bg-brand-darkest text-slate-200 font-body;
-    min-height: 100vh;
-    background-image: theme('backgroundImage.grid-pattern');
-    background-size: theme('backgroundSize.grid');
-  }
+  --crimson:        #8b1a1a;
+  --crimson-light:  #b52020;
+  --crimson-glow:   #cc2222;
 
-  /* Scrollbar personalizada Premium */
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    @apply bg-brand-darkest;
-  }
-  ::-webkit-scrollbar-thumb {
-    @apply bg-brand-deep rounded-full border-2 border-brand-darkest;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-brand-accent/60;
-  }
+  --parch:          #f0e6c8;
+  --parch-dim:      #c4b48c;
+  --parch-muted:    #7a6848;
 
-  /* Selección de texto */
-  ::selection {
-    @apply bg-brand-accent/30 text-white;
-  }
+  --surface:        #161209;
+  --surface-raised: #1e1a0d;
+  --surface-overlay:#251f0f;
+  --border:         #3a2d10;
+  --border-bright:  #6b5420;
+
+  --shadow-gold:    0 0 20px rgba(201,168,76,0.35), 0 0 6px rgba(201,168,76,0.2);
+  --shadow-crimson: 0 0 20px rgba(139,26,26,0.5);
+  --shadow-void:    0 8px 32px rgba(0,0,0,0.8);
 }
 
-/* ── Utilidades personalizadas ── */
-@layer utilities {
-  .font-display {
-    font-family: 'Rajdhani', sans-serif;
-  }
-  .font-body {
-    font-family: 'Barlow', sans-serif;
-  }
-  .font-mono {
-    font-family: 'DM Mono', monospace;
-  }
+/* ─── Base Styles ────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  /* Glow text dorado premium */
-  .text-glow-gold {
-    text-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
-  }
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
 
-  /* Glassmorphism effect */
-  .glass-panel {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;
-  }
+body {
+  background-color: var(--void);
+  background-image:
+    radial-gradient(ellipse 80% 60% at 50% 0%, #1e1508 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  color: var(--parch);
+  font-family: 'Crimson Text', Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
-  /* Línea decorativa lateral Gold */
-  .border-left-gold {
-    border-left: 3px solid theme('colors.brand.accent');
-    padding-left: theme('spacing.4');
-  }
+/* ─── Custom Scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gold-dark);
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background-color: rgba(201, 168, 76, 0.25);
+  color: var(--gold-light);
+}
+
+/* ─── Typography Utilities ───────────────────────────────────── */
+.font-display  { font-family: 'Cinzel Decorative', Georgia, serif; }
+.font-heading  { font-family: 'Cinzel', Georgia, serif; }
+.font-body     { font-family: 'Crimson Text', Georgia, serif; }
+
+.text-gold     { color: var(--gold); }
+.text-gold-light { color: var(--gold-light); }
+.text-gold-dim { color: var(--gold-dim); }
+.text-crimson  { color: var(--crimson-light); }
+.text-parch    { color: var(--parch); }
+.text-parch-dim { color: var(--parch-dim); }
+.text-parch-muted { color: var(--parch-muted); }
+
+.tracking-imperial { letter-spacing: 0.25em; }
+.tracking-relic    { letter-spacing: 0.4em; }
+.tracking-etched   { letter-spacing: 0.15em; }
+
+/* ─── Gold Glow Text ─────────────────────────────────────────── */
+.text-glow-gold {
+  text-shadow: 0 0 12px rgba(201,168,76,0.5), 0 0 24px rgba(201,168,76,0.25);
+}
+.text-glow-crimson {
+  text-shadow: 0 0 12px rgba(204,34,34,0.6), 0 0 24px rgba(139,26,26,0.3);
+}
+
+/* ─── Ornamental Dividers ────────────────────────────────────── */
+.divider-gold {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--gold-dim);
+}
+.divider-gold::before,
+.divider-gold::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+}
+
+.divider-rune {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+}
+.divider-rune::before,
+.divider-rune::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border-bright));
+}
+
+/* ─── Glass Surface ──────────────────────────────────────────── */
+.glass-surface {
+  background: rgba(22, 18, 9, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+}
+
+.glass-raised {
+  background: rgba(30, 26, 13, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-bright);
+}
+
+/* ─── Gold Border Utilities ──────────────────────────────────── */
+.border-gold-dim  { border-color: var(--border); }
+.border-gold      { border-color: var(--gold-dark); }
+.border-gold-bright { border-color: var(--gold); }
+
+/* ─── Corner Ornament ────────────────────────────────────────── */
+.corner-ornament {
+  position: relative;
+}
+.corner-ornament::before,
+.corner-ornament::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-color: var(--gold);
+  border-style: solid;
+}
+.corner-ornament::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+.corner-ornament::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 0 10px rgba(201,168,76,0.4), 0 0 20px rgba(201,168,76,0.2); }
+  50%       { text-shadow: 0 0 20px rgba(201,168,76,0.7), 0 0 40px rgba(201,168,76,0.35); }
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes borderGlow {
+  0%, 100% { box-shadow: 0 0 8px rgba(201,168,76,0.2); }
+  50%       { box-shadow: 0 0 20px rgba(201,168,76,0.45); }
+}
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-glow-pulse  { animation: glowPulse 3s ease-in-out infinite; }
+.animate-fade-in-up  { animation: fadeInUp 0.8s ease-out forwards; }
+.animate-fade-in     { animation: fadeIn 1s ease-out forwards; }
+.animate-border-glow { animation: borderGlow 2.5s ease-in-out infinite; }
+.animate-slide-down  { animation: slideDown 0.3s ease-out forwards; }
+
+/* ─── Stagger delays ─────────────────────────────────────────── */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+
+/* ─── Background Effects ─────────────────────────────────────── */
+.bg-void-radial {
+  background: radial-gradient(ellipse at center, #1a1510 0%, #0d0b08 70%);
+}
+.bg-crimson-glow {
+  background: radial-gradient(ellipse at center, rgba(139,26,26,0.18) 0%, transparent 70%);
+}
+.bg-surface-gradient {
+  background: linear-gradient(180deg, #251f0f 0%, #161209 100%);
+}
+
+/* ─── Table base ─────────────────────────────────────────────── */
+table { border-collapse: separate; border-spacing: 0; }
+
+/* ─── Focus ring ─────────────────────────────────────────────── */
+:focus-visible {
+  outline: 1px solid var(--gold);
+  outline-offset: 2px;
 }

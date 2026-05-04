@@ -1,0 +1,72 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-brand-darkest text-slate-200 font-body;
+    min-height: 100vh;
+    background-image: theme('backgroundImage.grid-pattern');
+    background-size: theme('backgroundSize.grid');
+  }
+
+  /* Scrollbar personalizada Premium */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-brand-darkest;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-deep rounded-full border-2 border-brand-darkest;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-accent/60;
+  }
+
+  /* Selección de texto */
+  ::selection {
+    @apply bg-brand-accent/30 text-white;
+  }
+}
+
+/* ── Utilidades personalizadas ── */
+@layer utilities {
+  .font-display {
+    font-family: 'Rajdhani', sans-serif;
+  }
+  .font-body {
+    font-family: 'Barlow', sans-serif;
+  }
+  .font-mono {
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* Glow text dorado premium */
+  .text-glow-gold {
+    text-shadow: 0 0 15px rgba(250, 204, 21, 0.4);
+  }
+
+  /* Glassmorphism effect */
+  .glass-panel {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-xl;
+  }
+
+  /* Línea decorativa lateral Gold */
+  .border-left-gold {
+    border-left: 3px solid theme('colors.brand.accent');
+    padding-left: theme('spacing.4');
+  }
+}
