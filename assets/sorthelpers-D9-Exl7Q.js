@@ -1,1 +1,0 @@
-function s(o){return[...o].sort((t,n)=>n.points!==t.points?n.points-t.points:n.wins-t.wins)}function r(o){return[...o].sort((t,n)=>n.totalPoints!==t.totalPoints?n.totalPoints-t.totalPoints:n.wins-t.wins)}function i(o){return[...o].sort((t,n)=>n.points-t.points)}export{i as a,s as b,r as s};
