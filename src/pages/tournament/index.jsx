@@ -1,116 +1,179 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import { useTournament } from '../../hooks/usetournament'
-import ListUpload from './listupload'
-import Groups from './groups'
-import QualificationMatches from './qualificationmatches'
-import FinalMatches from './finalmatches'
-import { Badge } from '../../components/ui/badge'
+import { Suspense, lazy, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
+import { Trophy, Upload, Users, Swords, Flag, Calendar, ChevronRight } from 'lucide-react'
+import { useTournament, useTournamentIndex } from '../../hooks/usetournament'
+import { formatDate, formatTournamentStatus } from '../../utils/formatters'
+import Badge from '../../components/ui/badge'
+import Card from '../../components/ui/card'
+
+const ListUpload          = lazy(() => import('./listupload'))
+const Groups              = lazy(() => import('./groups'))
+const QualificationMatches = lazy(() => import('./qualificationmatches'))
+const FinalMatches         = lazy(() => import('./finalmatches'))
 
 const TABS = [
-  { id: 'lists',         label: 'Subir Lista',       icon: '📋' },
-  { id: 'groups',        label: 'Grupos',             icon: '⚙' },
-  { id: 'qualification', label: 'Clasificación',      icon: '⚔' },
-  { id: 'finals',        label: 'Finales',            icon: '🏆' },
+  { id: 'upload',    label: 'Subir Lista',      icon: Upload  },
+  { id: 'groups',    label: 'Grupos',            icon: Users   },
+  { id: 'quals',     label: 'Clasificación',     icon: Swords  },
+  { id: 'finals',    label: 'Fase Final',        icon: Flag    },
 ]
 
-const STATUS_LABELS = {
-  upcoming: { label: 'Próximo',    variant: 'ghost' },
-  ongoing:  { label: 'En curso',   variant: 'active' },
-  finished: { label: 'Finalizado', variant: 'dark' },
-}
-
-export default function Tournament() {
-  const { id } = useParams()
-  const { tournament, loading, error } = useTournament(id)
-  const [activeTab, setActiveTab] = useState('groups')
-
-  if (loading) return (
-    <main className="min-h-screen pt-20 flex items-center justify-center">
-      <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#5a4920] animate-pulse">
-        Cargando expediente de torneo…
-      </p>
-    </main>
-  )
-
-  if (error || !tournament) return (
-    <main className="min-h-screen pt-20 flex items-center justify-center px-4">
-      <div className="border border-[#5c1010] bg-[#1a0c0c] px-8 py-6 text-center max-w-md">
-        <p className="font-heading text-sm tracking-[0.1em] uppercase text-[#cc4444] mb-2">
-          Expediente no encontrado
-        </p>
-        <p className="font-body text-sm text-[#7a6848]">
-          El torneo con ID "{id}" no existe en los archivos.
-        </p>
-      </div>
-    </main>
-  )
-
-  const statusInfo = STATUS_LABELS[tournament.status] ?? STATUS_LABELS.upcoming
+// ─── Página de listado de torneos ───────────────────────────────────────────
+function TournamentList() {
+  const { tournaments, loading } = useTournamentIndex()
 
   return (
-    <main className="min-h-screen pt-20 pb-24 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <main className="mx-auto max-w-4xl px-6 py-12">
+      <div className="mb-10">
+        <p className="font-mono text-xs text-brand-accent uppercase tracking-[0.2em] mb-2 flex items-center gap-2">
+          <span className="w-6 h-px bg-brand-accent inline-block" />
+          Todos los torneos
+        </p>
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-white flex items-center gap-4">
+          <Trophy size={32} className="text-brand-accent" strokeWidth={1.5} />
+          Torneos
+        </h1>
+      </div>
 
-        {/* Tournament header */}
-        <div className="text-center mb-10 pt-8">
-          <p className="font-heading text-[10px] tracking-[0.4em] uppercase text-[#5a4920] mb-3">
-            ✦ Expediente de Torneo ✦
-          </p>
-          <div className="flex items-center justify-center gap-3 mb-2">
-            <h1
-              className="font-heading text-2xl sm:text-3xl tracking-[0.15em] uppercase text-[#c9a84c]"
-              style={{ textShadow: '0 0 24px rgba(201,168,76,0.25)' }}
-            >
-              {tournament.name}
-            </h1>
-            <Badge variant={statusInfo.variant}>{statusInfo.label}</Badge>
-          </div>
-          {tournament.date && (
-            <p className="font-body text-sm text-[#7a6848]">{tournament.date}</p>
-          )}
-          <div
-            className="mx-auto w-48 h-px mt-4"
-            style={{ background: 'linear-gradient(90deg, transparent, #8a6f2e, transparent)' }}
-          />
+      {loading ? (
+        <div className="space-y-3 animate-pulse">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="h-20 rounded-2xl border border-white/10 bg-brand-deep/40" />
+          ))}
         </div>
+      ) : (
+        <div className="space-y-3">
+          {tournaments.map(t => {
+            const status = formatTournamentStatus(t.status)
+            return (
+              <Card
+                key={t.id}
+                as={Link}
+                to={`/tournament/${t.id}`}
+                interactive
+                className="flex items-center justify-between px-5 py-4"
+              >
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h2 className="font-display font-semibold text-white text-base">{t.name}</h2>
+                    <Badge color={status.color}>{status.label}</Badge>
+                  </div>
+                  <p className="font-body text-xs text-slate-500 flex items-center gap-1.5">
+                    <Calendar size={11} />
+                    {formatDate(t.date)}
+                    {t.players && (
+                      <span className="ml-2 flex items-center gap-1">
+                        <Users size={11} />
+                        {t.players} jugadores
+                      </span>
+                    )}
+                  </p>
+                </div>
+                <ChevronRight size={16} className="text-slate-600 shrink-0 group-hover:text-brand-accent transition-colors" />
+              </Card>
+            )
+          })}
+        </div>
+      )}
+    </main>
+  )
+}
 
-        {/* Tabs */}
-        <div className="flex overflow-x-auto border-b border-[#3a2d10] mb-8 scrollbar-hide">
-          {TABS.map(({ id: tabId, label, icon }) => (
+// ─── Página de torneo individual ─────────────────────────────────────────────
+function TournamentDetail({ id }) {
+  const { tournament, loading, error } = useTournament(id)
+  const [activeTab, setActiveTab]      = useState('groups')
+
+  if (loading) return (
+    <main className="mx-auto max-w-5xl px-6 py-12">
+      <div className="h-10 w-64 bg-brand-deep rounded-xl animate-pulse mb-4" />
+      <div className="h-6 w-48 bg-brand-deep/60 rounded-lg animate-pulse" />
+    </main>
+  )
+
+  if (error) return (
+    <main className="mx-auto max-w-5xl px-6 py-12">
+      <p className="text-brand-danger border border-brand-danger/30 rounded-xl px-4 py-3 bg-brand-danger/10">{error}</p>
+    </main>
+  )
+
+  if (!tournament) return null
+
+  const status = formatTournamentStatus(tournament.status)
+
+  return (
+    <main className="mx-auto max-w-5xl px-6 py-12">
+      {/* Breadcrumb */}
+      <p className="font-mono text-xs text-slate-600 mb-6">
+        <Link to="/tournament" className="hover:text-brand-accent transition-colors">Torneos</Link>
+        {' / '}
+        <span className="text-slate-400">{tournament.name}</span>
+      </p>
+
+      {/* Header */}
+      <div className="flex flex-wrap items-start justify-between gap-4 mb-8">
+        <div className="flex-1">
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">
+            {tournament.name}
+          </h1>
+          <p className="font-body text-slate-400 text-sm flex items-center gap-3">
+            <Calendar size={13} />
+            {formatDate(tournament.date)}
+            <Badge color={status.color}>{status.label}</Badge>
+          </p>
+        </div>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 mb-8 border-b border-white/10 overflow-x-auto scrollbar-hide">
+        {TABS.map(({ id, label, icon: Icon }) => {
+          const isActive = activeTab === id
+          return (
             <button
-              key={tabId}
-              onClick={() => setActiveTab(tabId)}
+              key={id}
+              onClick={() => setActiveTab(id)}
               className={[
-                'flex items-center gap-2 px-5 py-3 shrink-0',
-                'font-heading text-xs tracking-[0.2em] uppercase',
-                'transition-all duration-200 relative',
-                activeTab === tabId
-                  ? 'text-[#c9a84c]'
-                  : 'text-[#5a4920] hover:text-[#8a6f2e]',
+                'relative flex items-center gap-2 px-4 py-3 font-display font-medium text-xs uppercase tracking-wide transition-colors whitespace-nowrap shrink-0',
+                isActive ? 'text-brand-accent text-glow-gold' : 'text-slate-500 hover:text-slate-300',
               ].join(' ')}
+              aria-selected={isActive}
+              role="tab"
             >
-              <span className="text-sm">{icon}</span>
-              <span className="hidden sm:inline">{label}</span>
-              {activeTab === tabId && (
-                <span
-                  className="absolute bottom-0 left-0 right-0 h-0.5"
-                  style={{ background: 'linear-gradient(90deg, transparent, #c9a84c, transparent)' }}
+              <Icon size={13} />
+              {label}
+              {isActive && (
+                <motion.div
+                  layoutId="tournament-tab"
+                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-accent"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                 />
               )}
             </button>
-          ))}
-        </div>
-
-        {/* Tab content */}
-        <div className="animate-fade-in">
-          {activeTab === 'lists'         && <ListUpload tournament={tournament} />}
-          {activeTab === 'groups'        && <Groups groups={tournament.groups} />}
-          {activeTab === 'qualification' && <QualificationMatches matches={tournament.qualificationMatches} />}
-          {activeTab === 'finals'        && <FinalMatches matches={tournament.finalMatches} />}
-        </div>
-
+          )
+        })}
       </div>
+
+      {/* Tab content */}
+      <Suspense fallback={<div className="h-40 animate-pulse bg-brand-deep/40 rounded-2xl border border-white/10" />}>
+        <motion.div
+          key={activeTab}
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.25 }}
+        >
+          {activeTab === 'upload' && <ListUpload tournament={tournament} />}
+          {activeTab === 'groups' && <Groups tournament={tournament} />}
+          {activeTab === 'quals'  && <QualificationMatches tournament={tournament} />}
+          {activeTab === 'finals' && <FinalMatches tournament={tournament} />}
+        </motion.div>
+      </Suspense>
     </main>
   )
+}
+
+// ─── Exportación principal: router entre listado y detalle ────────────────────
+export default function Tournament() {
+  const { id } = useParams()
+  return id ? <TournamentDetail id={id} /> : <TournamentList />
 }

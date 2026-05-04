@@ -1,84 +1,63 @@
-import React from 'react'
+import { ChevronRight } from 'lucide-react'
 
-export function MatchRow({ match, isFinal = false, isLast = false }) {
+/**
+ * Fila de resultado de partida con diseño Premium Dark.
+ * @param {{ player1, score1, player2, score2, winner }} match
+ */
+export default function MatchRow({ match }) {
   const { player1, score1, player2, score2, winner } = match
-  const p1wins = winner === player1
-  const p2wins = winner === player2
-  const isDraw = !winner
+
+  const p1Wins = player1 === winner
+  const p2Wins = player2 === winner
 
   return (
-    <div
-      className={`
-        flex items-center gap-2 sm:gap-4 px-4 sm:px-5 py-3
-        ${!isLast ? 'border-b border-[#1e1a0d]' : ''}
-        ${isFinal ? 'bg-[#1a1610]' : 'hover:bg-[#1a1610]'}
-        transition-colors duration-150
-        group
-      `}
-    >
-      {/* Player 1 */}
-      <div className={`flex-1 flex items-center justify-end gap-2 min-w-0 ${p1wins ? '' : 'opacity-60'}`}>
-        <span
-          className={`
-            font-heading text-xs sm:text-sm tracking-[0.1em] truncate text-right
-            ${p1wins ? (isFinal ? 'text-[#e8c96a]' : 'text-[#c9a84c]') : 'text-[#7a6848]'}
-          `}
-        >
-          {player1}
-        </span>
-        {p1wins && (
-          <span className="shrink-0 font-heading text-[9px] text-[#8a6f2e]">✦</span>
-        )}
+    <div className="flex items-center gap-3 py-3 px-4 rounded-xl border border-white/10 glass-panel hover:border-brand-accent/30 transition-all duration-200 group">
+      {/* Jugador 1 */}
+      <div className={[
+        'flex-1 text-right font-display font-semibold text-sm transition-colors',
+        p1Wins ? 'text-white text-glow-gold' : 'text-slate-400 group-hover:text-slate-300',
+      ].join(' ')}>
+        {player1}
       </div>
 
-      {/* Score block */}
-      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+      {/* Marcador */}
+      <div className="flex items-center gap-2 shrink-0">
         {/* Score 1 */}
-        <span
-          className={`
-            font-heading text-base sm:text-lg w-7 text-center tabular-nums
-            ${p1wins ? 'text-[#c9a84c]' : 'text-[#5a4920]'}
-          `}
-        >
-          {score1 ?? '—'}
+        <span className={[
+          'w-9 h-9 flex items-center justify-center rounded-lg font-mono font-bold text-sm transition-all',
+          p1Wins
+            ? 'bg-brand-accent/20 text-brand-accent border border-brand-accent/40 shadow-[0_0_10px_rgba(250,204,21,0.2)]'
+            : 'bg-brand-deep text-slate-500 border border-white/10',
+        ].join(' ')}>
+          {score1}
         </span>
 
-        {/* VS divider */}
-        <div className="flex flex-col items-center gap-0.5 w-6">
-          <div className="w-full h-px bg-[#3a2d10]" />
-          <span className="font-heading text-[9px] tracking-[0.1em] text-[#3a2d10]">
-            {isDraw ? '=' : 'vs'}
-          </span>
-          <div className="w-full h-px bg-[#3a2d10]" />
-        </div>
+        <span className="text-slate-600 font-mono text-xs px-0.5">—</span>
 
         {/* Score 2 */}
-        <span
-          className={`
-            font-heading text-base sm:text-lg w-7 text-center tabular-nums
-            ${p2wins ? 'text-[#c9a84c]' : 'text-[#5a4920]'}
-          `}
-        >
-          {score2 ?? '—'}
+        <span className={[
+          'w-9 h-9 flex items-center justify-center rounded-lg font-mono font-bold text-sm transition-all',
+          p2Wins
+            ? 'bg-brand-accent/20 text-brand-accent border border-brand-accent/40 shadow-[0_0_10px_rgba(250,204,21,0.2)]'
+            : 'bg-brand-deep text-slate-500 border border-white/10',
+        ].join(' ')}>
+          {score2}
         </span>
       </div>
 
-      {/* Player 2 */}
-      <div className={`flex-1 flex items-center gap-2 min-w-0 ${p2wins ? '' : 'opacity-60'}`}>
-        {p2wins && (
-          <span className="shrink-0 font-heading text-[9px] text-[#8a6f2e]">✦</span>
-        )}
-        <span
-          className={`
-            font-heading text-xs sm:text-sm tracking-[0.1em] truncate
-            ${p2wins ? (isFinal ? 'text-[#e8c96a]' : 'text-[#c9a84c]') : 'text-[#7a6848]'}
-          `}
-        >
-          {player2}
-        </span>
+      {/* Jugador 2 */}
+      <div className={[
+        'flex-1 text-left font-display font-semibold text-sm transition-colors',
+        p2Wins ? 'text-white text-glow-gold' : 'text-slate-400 group-hover:text-slate-300',
+      ].join(' ')}>
+        {player2}
+      </div>
+
+      {/* Ganador indicador */}
+      <div className="hidden md:flex items-center gap-1 text-xs font-mono text-brand-accent/60 w-32 shrink-0">
+        <ChevronRight size={12} className="text-brand-accent" />
+        <span className="truncate">{winner}</span>
       </div>
     </div>
   )
 }
-
-export default MatchRow
