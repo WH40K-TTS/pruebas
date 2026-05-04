@@ -1,9 +1,9 @@
 import React from 'react'
-import { useRules } from '../../hooks/userules'
+// import { useRules } from '../../hooks/userules'
 import RuleSection from './rulesection'
 
 export default function IndividualRules() {
-  const { sections, loading, error } = useRules('individual')
+  //const { sections, loading, error } = useRules('individual')
 
   if (loading) return (
     <div className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#5a4920] animate-pulse py-8 text-center">
