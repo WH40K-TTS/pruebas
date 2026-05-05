@@ -18,7 +18,7 @@ export function useRanking() {
         setLoading(true)
         setError(null)
 
-        const res = await fetch(`${import.meta.env.BASE_URL}data/ranking.json`)
+        const res = await fetch(`${import.meta.env.BASE_URL}../data/ranking.json`)
         if (!res.ok) throw new Error(`HTTP ${res.status} al cargar ranking.json`)
 
         const json = await res.json()

@@ -7,8 +7,8 @@ import { Footer } from './components/layout/footer'
 const Home        = React.lazy(() => import('./pages/home/index'))
 const Ranking     = React.lazy(() => import('./pages/ranking/index'))
 const Rules       = React.lazy(() => import('./pages/rules/index'))
-const Tournaments = React.lazy(() => import('./pages/tournament/index'))
-const Tournament  = React.lazy(() => import('./pages/tournament/index'))
+const Tournaments = React.lazy(() => import('./pages/tournaments/index'))   // LISTA de torneos
+const Tournament  = React.lazy(() => import('./pages/tournament/index'))    // UN torneo por :id
 
 function PageLoader() {
   return (
@@ -29,13 +29,19 @@ export default function App() {
         <div className="flex-1">
           <Suspense fallback={<PageLoader />}>
             <Routes>
-              <Route path="/"                    element={<Home />} />
-              <Route path="/ranking"             element={<Ranking />} />
-              <Route path="/rules"               element={<Rules />} />
-              <Route path="/tournaments"         element={<Tournaments />} />
-              <Route path="/tournament/:id"      element={<Tournament />} />
-              {/* Fallback: redirect unknown routes to home */}
-              <Route path="*"                    element={<Navigate to="/" replace />} />
+              {/* Rutas principales */}
+              <Route path="/"               element={<Home />} />
+              <Route path="/ranking"        element={<Ranking />} />
+              <Route path="/rules"          element={<Rules />} />
+
+              {/* /tournaments → lista de todos los torneos */}
+              <Route path="/tournaments"    element={<Tournaments />} />
+
+              {/* /tournament/:id → detalle de un torneo concreto */}
+              <Route path="/tournament/:id" element={<Tournament />} />
+
+              {/* Fallback: cualquier ruta desconocida → Home */}
+              <Route path="*"              element={<Navigate to="/" replace />} />
             </Routes>
           </Suspense>
         </div>

@@ -25,7 +25,7 @@ export function useTournament(id) {
         setTournament(null)
 
         const res = await fetch(
-          `${import.meta.env.BASE_URL}data/tournaments/${id}.json`
+          `${import.meta.env.BASE_URL}../data/tournaments/${id}.json`
         )
         if (!res.ok) throw new Error(`Torneo "${id}" no encontrado (HTTP ${res.status})`)
 
