@@ -1,85 +1,90 @@
-import Card from '../ui/card'
-import { sortGroupPlayers } from '../../utils/sorthelpers'
-import { Crown } from 'lucide-react'
+import React from 'react'
 
-/**
- * Tarjeta de grupo con diseño Premium Dark y jugadores ordenados por puntos.
- */
-export default function GroupCard({ group }) {
-  const sorted = sortGroupPlayers(group.players)
+export function GroupCard({ group }) {
+  const sorted = [...(group.players ?? [])].sort((a, b) => b.points - a.points)
 
   return (
-    <Card className="overflow-hidden">
+    <div className="relative border border-[#3a2d10] bg-[#161209] hover:border-[#6b5420] hover:shadow-[0_0_20px_rgba(201,168,76,0.1)] transition-all duration-300">
+
+      {/* Corner ornaments */}
+      <span aria-hidden className="pointer-events-none absolute top-0 left-0 w-3 h-3 border-t border-l border-[#c9a84c]/40" />
+      <span aria-hidden className="pointer-events-none absolute bottom-0 right-0 w-3 h-3 border-b border-r border-[#c9a84c]/40" />
+
       {/* Header */}
-      <div className="px-4 py-3 border-b border-white/10 bg-brand-deep/50 flex items-center justify-between">
-        <h3 className="font-display font-semibold text-brand-accent tracking-wide uppercase text-sm">
+      <div className="px-4 py-3 border-b border-[#2a2210] flex items-center justify-between">
+        <h3 className="font-heading text-xs tracking-[0.2em] uppercase text-[#c9a84c]">
           {group.name}
         </h3>
-        <span className="text-xs font-mono text-slate-500">
-          {group.players.length} jugadores
+        <span className="font-heading text-[9px] tracking-[0.2em] uppercase text-[#5a4920]">
+          {sorted.length} generales
         </span>
       </div>
 
-      {/* Tabla de jugadores */}
-      <table className="w-full text-sm">
-        <caption className="sr-only">Jugadores del {group.name}</caption>
-        <thead>
-          <tr className="border-b border-white/5">
-            <th scope="col" className="px-4 py-2 text-left text-xs font-mono text-slate-500 uppercase tracking-wider w-8">#</th>
-            <th scope="col" className="px-4 py-2 text-left text-xs font-mono text-slate-500 uppercase tracking-wider">Jugador</th>
-            <th scope="col" className="px-4 py-2 text-right text-xs font-mono text-slate-500 uppercase tracking-wider">Pts</th>
-            <th scope="col" className="px-4 py-2 text-right text-xs font-mono text-slate-500 uppercase tracking-wider">W/L</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map((player, idx) => {
-            const isTop2      = idx < 2
-            const isFirst     = idx === 0
+      {/* Player list */}
+      <div>
+        {sorted.map((player, idx) => {
+          const isFirst = idx === 0
+          const isLast = idx === sorted.length - 1
+          return (
+            <div
+              key={player.name}
+              className={`
+                flex items-center justify-between px-4 py-2.5
+                ${!isLast ? 'border-b border-[#1e1a0d]' : ''}
+                ${isFirst ? 'bg-[#1a1610]' : ''}
+                transition-colors hover:bg-[#1a1610]
+              `}
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                {/* Position indicator */}
+                <span
+                  className="font-heading text-[10px] w-4 shrink-0"
+                  style={{ color: isFirst ? '#c9a84c' : '#3a2d10' }}
+                >
+                  {idx === 0 ? '▲' : idx + 1}
+                </span>
 
-            return (
-              <tr
-                key={player.name}
-                className={[
-                  'border-b border-white/5 last:border-0 transition-colors duration-200',
-                  isTop2 ? 'bg-brand-accent/5 hover:bg-brand-accent/10' : 'hover:bg-white/5',
-                ].join(' ')}
-              >
-                {/* Posición */}
-                <td className="px-4 py-2.5 text-slate-500 font-mono text-xs">
-                  {isFirst ? (
-                    <Crown size={12} className="text-brand-accent" />
-                  ) : (
-                    <span className={isTop2 ? 'text-brand-accent/70' : ''}>{idx + 1}</span>
-                  )}
-                </td>
-                {/* Nombre */}
-                <td className={[
-                  'px-4 py-2.5 font-display font-medium',
-                  isTop2 ? 'text-white' : 'text-slate-300',
-                ].join(' ')}>
+                {/* Name */}
+                <span
+                  className={`font-body text-sm truncate ${
+                    isFirst ? 'text-[#f0e6c8]' : 'text-[#c4b48c]'
+                  }`}
+                >
                   {player.name}
-                  {isTop2 && (
-                    <span className="ml-2 text-xs font-mono text-brand-accent/50">↑</span>
-                  )}
-                </td>
-                {/* Puntos */}
-                <td className={[
-                  'px-4 py-2.5 text-right font-mono font-semibold',
-                  isFirst ? 'text-brand-accent' : isTop2 ? 'text-brand-accent/70' : 'text-slate-400',
-                ].join(' ')}>
+                </span>
+              </div>
+
+              {/* Stats */}
+              <div className="flex items-center gap-3 shrink-0 ml-2">
+                <span className="font-heading text-[10px] tracking-[0.1em] text-[#4a9a4a]">
+                  {player.wins}V
+                </span>
+                <span className="font-heading text-[10px] tracking-[0.1em] text-[#7a6848]">/</span>
+                <span className="font-heading text-[10px] tracking-[0.1em] text-[#cc4444]">
+                  {player.losses}D
+                </span>
+                <span
+                  className={`
+                    font-heading text-sm ml-1
+                    ${isFirst ? 'text-[#c9a84c]' : 'text-[#8a6f2e]'}
+                  `}
+                >
                   {player.points}
-                </td>
-                {/* W/L */}
-                <td className="px-4 py-2.5 text-right font-mono text-xs text-slate-500">
-                  <span className="text-green-500/80">{player.wins}W</span>
-                  {' / '}
-                  <span className="text-brand-danger/70">{player.losses}L</span>
-                </td>
-              </tr>
-            )
-          })}
-        </tbody>
-      </table>
-    </Card>
+                </span>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      {/* Footer */}
+      <div className="px-4 py-2 border-t border-[#1e1a0d]">
+        <p className="font-heading text-[9px] tracking-[0.2em] uppercase text-[#3a2d10] text-right">
+          pts
+        </p>
+      </div>
+    </div>
   )
 }
+
+export default GroupCard

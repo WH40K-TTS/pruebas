@@ -1,62 +1,72 @@
+import React from 'react'
 import MatchRow from '../../components/tournament/matchrow'
-import { motion } from 'framer-motion'
-import { Trophy } from 'lucide-react'
 
 const ROUND_ICONS = {
-  'Final': <Trophy size={14} className="text-amber-400" />,
+  'Cuartos de Final': '⚔',
+  'Semifinales':      '⚙',
+  'Final':            '🏆',
+  '3er y 4o Puesto':  '🥉',
 }
 
-export default function FinalMatches({ tournament }) {
-  const rounds = tournament?.finalMatches ?? []
-
-  if (rounds.length === 0) {
-    return (
-      <p className="font-body text-slate-500 text-sm text-center py-10 border border-dashed border-slate-800 rounded-lg">
-        La fase final aún no ha comenzado.
+export default function FinalMatches({ matches }) {
+  if (!matches?.length) return (
+    <div className="text-center py-16">
+      <p className="font-heading text-[11px] tracking-[0.3em] uppercase text-[#5a4920]">
+        La fase final aún no ha comenzado
       </p>
-    )
-  }
-
-  // La final al final
-  const ordered = [...rounds].sort((a, b) => {
-    const priority = {
-      'Cuartos de Final': 0,
-      'Semifinales': 1,
-      '3er y 4º Puesto': 2,
-      'Final': 3,
-    }
-    return (priority[a.round] ?? 99) - (priority[b.round] ?? 99)
-  })
+    </div>
+  )
 
   return (
-    <div className="space-y-8">
-      {ordered.map((round, rIdx) => (
-        <motion.section
-          key={round.round}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: rIdx * 0.1, duration: 0.35 }}
-        >
-          {/* Round header */}
-          <div className="flex items-center gap-3 mb-3">
-            {ROUND_ICONS[round.round] ?? null}
-            <span className={[
-              'font-display font-semibold uppercase tracking-wide text-xs',
-              round.round === 'Final' ? 'text-amber-400' : 'text-slate-400',
-            ].join(' ')}>
-              {round.round}
-            </span>
-            <div className="flex-1 h-px bg-slate-800/60" />
-          </div>
+    <div>
+      <div className="flex items-center gap-3 mb-8">
+        <p className="font-heading text-[10px] tracking-[0.35em] uppercase text-[#5a4920] shrink-0">
+          ✦ Fase Eliminatoria ✦
+        </p>
+        <div className="flex-1 h-px" style={{ background: 'linear-gradient(90deg, #3a2d10, transparent)' }} />
+      </div>
 
-          {/* Matches */}
-          <div className="space-y-2">
-            {round.matches.map((match, mIdx) => (
-              <MatchRow key={`${match.player1}-${match.player2}-${mIdx}`} match={match} />
-            ))}
+      <div className="space-y-5">
+        {matches.map((round) => (
+          <div key={round.round} className="border border-[#3a2d10] bg-[#161209]">
+
+            {/* Round header */}
+            <div
+              className={`px-5 py-3 border-b flex items-center gap-3 ${
+                round.round === 'Final'
+                  ? 'border-[#6b5420] bg-[#1e1a0d]'
+                  : 'border-[#2a2210]'
+              }`}
+            >
+              <span>{ROUND_ICONS[round.round] ?? '⚔'}</span>
+              <h3
+                className={`font-heading text-sm tracking-[0.15em] uppercase ${
+                  round.round === 'Final' ? 'text-[#e8c96a]' : 'text-[#c9a84c]'
+                }`}
+              >
+                {round.round}
+              </h3>
+              {round.round === 'Final' && (
+                <span className="ml-auto font-heading text-[9px] tracking-[0.3em] uppercase text-[#8a6f2e]">
+                  Batalla Decisiva
+                </span>
+              )}
+            </div>
+
+            {/* Matches */}
+            <div>
+              {round.matches?.map((match, i) => (
+                <MatchRow
+                  key={i}
+                  match={match}
+                  isFinal={round.round === 'Final'}
+                  isLast={i === round.matches.length - 1}
+                />
+              ))}
+            </div>
           </div>
-        </motion.section>
-      ))}
+        ))}
+      </div>
     </div>
   )
 }

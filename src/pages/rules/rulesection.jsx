@@ -1,69 +1,54 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { ChevronDown } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
-import Card from '../../components/ui/card'
 
-/**
- * Sección de regla colapsable con diseño Premium Dark.
- */
-export default function RuleSection({ section, index }) {
-  const [open, setOpen] = useState(index === 0)
+export function RuleSection({ section, index }) {
+  const [open, setOpen] = useState(true)
 
   return (
-    <Card className="overflow-hidden">
+    <div className="border border-[#3a2d10] bg-[#161209] mb-4 overflow-hidden">
+
+      {/* Section header */}
       <button
-        onClick={() => setOpen(v => !v)}
-        aria-expanded={open}
+        onClick={() => setOpen(o => !o)}
         className="w-full flex items-center justify-between px-5 py-4 text-left group"
+        aria-expanded={open}
       >
         <div className="flex items-center gap-3">
-          <span className="font-mono text-xs text-brand-accent/50 w-5">
+          <span className="font-heading text-[10px] tracking-[0.3em] uppercase text-[#5a4920]">
             {String(index + 1).padStart(2, '0')}
           </span>
-          <h3 className="font-display font-semibold text-white text-base group-hover:text-brand-highlight transition-colors">
+          <h3 className="font-heading text-sm tracking-[0.15em] uppercase text-[#c9a84c] group-hover:text-[#e8c96a] transition-colors">
             {section.title}
           </h3>
-          <span className="font-mono text-xs text-slate-600">
-            ({section.rules.length} reglas)
-          </span>
         </div>
         <ChevronDown
           size={16}
-          className={[
-            'text-slate-500 transition-transform duration-300 shrink-0',
-            open ? 'rotate-180 text-brand-accent' : '',
-          ].join(' ')}
+          className={`text-[#5a4920] transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <ul
-              className="px-5 pb-5 space-y-2.5 border-t border-white/10 pt-4"
-              role="list"
-            >
-              {section.rules.map((rule, i) => (
-                <li
-                  key={i}
-                  className="flex items-start gap-3 pt-2.5 first:pt-0 border-left-gold"
+      {/* Rules list */}
+      {open && (
+        <div className="border-t border-[#2a2210] px-5 py-4 animate-fade-in">
+          <ul className="space-y-3">
+            {section.rules.map((rule, i) => (
+              <li key={i} className="flex gap-3">
+                <span
+                  aria-hidden
+                  className="font-heading text-[10px] text-[#5a4920] mt-1 shrink-0 tracking-widest"
                 >
-                  <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-accent/50 shrink-0" />
-                  <p className="font-body text-slate-300 text-sm leading-relaxed">
-                    {rule}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </Card>
+                  ✦
+                </span>
+                <p className="font-body text-base text-[#c4b48c] leading-relaxed">
+                  {rule}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
   )
 }
+
+export default RuleSection

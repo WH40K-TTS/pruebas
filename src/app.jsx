@@ -1,74 +1,47 @@
-import { Suspense, lazy } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import Navbar from './components/layout/navbar'
-import Footer from './components/layout/footer'
+import React, { Suspense } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Navbar } from './components/layout/navbar'
+import { Footer } from './components/layout/footer'
 
-// Lazy loading de páginas
-const Home       = lazy(() => import('./pages/home/index'))
-const Rules      = lazy(() => import('./pages/rules/index'))
-const Ranking    = lazy(() => import('./pages/ranking/index'))
-const Tournament = lazy(() => import('./pages/tournament/index'))
+// Lazy-loaded pages
+const Home        = React.lazy(() => import('./pages/home/index'))
+const Ranking     = React.lazy(() => import('./pages/ranking/index'))
+const Rules       = React.lazy(() => import('./pages/rules/index'))
+const Tournaments = React.lazy(() => import('./pages/tournaments/index'))
+const Tournament  = React.lazy(() => import('./pages/tournament/index'))
 
-// Transición de página
-const PageTransition = ({ children }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 6 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -4 }}
-    transition={{ duration: 0.25, ease: 'easeOut' }}
-  >
-    {children}
-  </motion.div>
-)
-
-// Fallback mientras carga la página
 function PageLoader() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center">
-      <div className="flex items-center gap-3 text-slate-600 font-mono text-xs uppercase tracking-wider">
-        <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-ping" />
+    <div className="min-h-screen flex items-center justify-center">
+      <p className="font-heading text-[11px] tracking-[0.35em] uppercase text-[#5a4920] animate-pulse">
         Cargando…
-      </div>
+      </p>
     </div>
-  )
-}
-
-// Página 404
-function NotFound() {
-  return (
-    <main className="min-h-[70vh] flex items-center justify-center px-6">
-      <div className="text-center">
-        <p className="font-mono text-7xl font-bold text-slate-800 mb-4">404</p>
-        <h1 className="font-display text-2xl font-semibold text-white mb-2">Página no encontrada</h1>
-        <p className="font-body text-slate-500 text-sm">
-          La ruta que buscas no existe en este repositorio.
-        </p>
-      </div>
-    </main>
   )
 }
 
 export default function App() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
 
-      {/* Offset para la navbar fija */}
-      <div className="flex-1 pt-14">
-        <Suspense fallback={<PageLoader />}>
-          <Routes>
-            <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-            <Route path="/rules" element={<PageTransition><Rules /></PageTransition>} />
-            <Route path="/ranking" element={<PageTransition><Ranking /></PageTransition>} />
-            <Route path="/tournament" element={<PageTransition><Tournament /></PageTransition>} />
-            <Route path="/tournament/:id" element={<PageTransition><Tournament /></PageTransition>} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <div className="flex-1">
+          <Suspense fallback={<PageLoader />}>
+            <Routes>
+              <Route path="/"                    element={<Home />} />
+              <Route path="/ranking"             element={<Ranking />} />
+              <Route path="/rules"               element={<Rules />} />
+              <Route path="/tournaments"         element={<Tournaments />} />
+              <Route path="/tournament/:id"      element={<Tournament />} />
+              {/* Fallback: redirect unknown routes to home */}
+              <Route path="*"                    element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
-    </div>
+    </BrowserRouter>
   )
 }

@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react'
-import { sortRanking } from '../utils/sorthelpers'
+import { useState, useEffect, useMemo } from 'react'
+import { sortByPoints } from '../utils/sorthelpers'
 
 /**
- * Hook para cargar y filtrar el ranking global.
- * @returns {{ players: Array, loading: boolean, error: string|null }}
+ * Carga y expone los datos de clasificación desde /public/data/ranking.json.
+ * @returns {{ players: Player[], loading: boolean, error: string|null }}
  */
 export function useRanking() {
-  const [players, setPlayers] = useState([])
+  const [raw,     setRaw]     = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError]     = useState(null)
+  const [error,   setError]   = useState(null)
 
   useEffect(() => {
     let cancelled = false
@@ -17,17 +17,14 @@ export function useRanking() {
       try {
         setLoading(true)
         setError(null)
-        // Vite convierte los imports dinámicos de /src/data en URLs correctas
-        const module = await import('../data/ranking.json')
-        const data   = module.default
-        if (!cancelled) {
-          setPlayers(sortRanking(data.players))
-        }
+
+        const res = await fetch(`${import.meta.env.BASE_URL}data/ranking.json`)
+        if (!res.ok) throw new Error(`HTTP ${res.status} al cargar ranking.json`)
+
+        const json = await res.json()
+        if (!cancelled) setRaw(json.players ?? [])
       } catch (err) {
-        if (!cancelled) {
-          setError('No se pudo cargar el ranking. Inténtalo de nuevo.')
-          console.error('[useRanking]', err)
-        }
+        if (!cancelled) setError(err.message)
       } finally {
         if (!cancelled) setLoading(false)
       }
@@ -37,14 +34,10 @@ export function useRanking() {
     return () => { cancelled = true }
   }, [])
 
-  /**
-   * Devuelve los datos de un jugador por su ID.
-   * @param {string} playerId
-   * @returns {object|undefined}
-   */
-  function getPlayer(playerId) {
-    return players.find(p => p.id === playerId)
-  }
+  // Ordena por puntos desc; empate → ratio V/D
+  const players = useMemo(() => sortByPoints(raw), [raw])
 
-  return { players, loading, error, getPlayer }
+  return { players, loading, error }
 }
+
+export default useRanking
