@@ -9,8 +9,15 @@
     <meta property="og:type" content="website" />
     <title>WH40K-TTS — Torneos Warhammer 40.000</title>
     <link rel="icon" type="image/svg+xml" href="/pruebas/assets/favicon-DJbQt0Na.svg" />
-    <!-- GitHub Pages SPA redirect restore -->
-    <script src="./_gh_pages_redirect.js"></script>
+    <!-- GitHub Pages SPA: restore route after 404.html redirect -->
+    <script>
+      (function () {
+        var p = new URLSearchParams(window.location.search).get('p');
+        if (p) {
+          window.history.replaceState(null, '', p + window.location.hash);
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="/pruebas/assets/index-DcP0KFEg.js"></script>
     <link rel="stylesheet" crossorigin href="/pruebas/assets/index-DxOfnjTG.css">
   </head>
