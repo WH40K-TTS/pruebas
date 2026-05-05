@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRules } from '../../hooks/userules'
-import RuleSection from './rulesection'
+//import RuleSection from './rulesection'
 
 export default function IndividualRules() {
   const { sections, loading, error } = useRules('individual')
