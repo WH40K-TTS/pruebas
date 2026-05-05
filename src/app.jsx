@@ -7,7 +7,7 @@ import { Footer } from './components/layout/footer'
 const Home        = React.lazy(() => import('./pages/home/index'))
 const Ranking     = React.lazy(() => import('./pages/ranking/index'))
 const Rules       = React.lazy(() => import('./pages/rules/index'))
-const Tournaments = React.lazy(() => import('./pages/tournaments/index'))   // LISTA de torneos
+//const Tournaments = React.lazy(() => import('./pages/tournaments/index'))   // LISTA de torneos
 const Tournament  = React.lazy(() => import('./pages/tournament/index'))    // UN torneo por :id
 
 function PageLoader() {
