@@ -1,1 +1,0 @@
-import{j as e}from"./index-DzMTgaIV.js";function l({children:s,className:o="",glowing:t=!1,interactive:d=!1,as:a="div",...r}){return e.jsx(a,{className:"bg-surface border border-gold p-6 shadow-gold",...r,children:s})}export{l as C};
