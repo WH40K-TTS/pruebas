@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useRanking } from '../../hooks/useRanking'
+import { useRanking } from '../../hooks/useranking'
 import { Modal } from '../../components/ui/modal'
 import { Badge } from '../../components/ui/badge'
 
