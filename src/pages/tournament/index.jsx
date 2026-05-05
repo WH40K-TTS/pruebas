@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { useTournament } from '../../hooks/useTournament'
+import { useTournament } from '../../hooks/usetournament'
 import ListUpload from './listupload'
 import Groups from './groups'
 import QualificationMatches from './qualificationmatches'
